@@ -5,27 +5,68 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.5f;
+    private float _speed = 8f;
+    private float fireRate = .25f;
+    private float canFire = -.1f;
+    public GameObject laserPrefab;
+
     void Start()
     {
-        // take the current position = new position( 0, 0, 0)
-        transform.position = new Vector3(0, 0, 0);
+        StrtPos();
     }
-
 
     void Update()
     {
-        //variables for movement
+        CalcMove();
+        LaserCooldown();
+
+    }
+
+    private void StrtPos()
+    {
+        transform.position = new Vector3(0, 0, 0);
+    }
+    private void CalcMove()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        //movement activity
         transform.Translate(_speed * horizontalInput * Time.deltaTime * Vector3.right);
         transform.Translate(_speed * Time.deltaTime * verticalInput * Vector3.up);
-
-       if (transform.position.y > 5)
+        if (transform.position.y > 5)
         {
             transform.position = new Vector3(transform.position.x, 5, 0);
         }
-;
+        else if (transform.position.y < -3.4f)
+        {
+            transform.position = new Vector3(transform.position.x, -3.4f, 0);
+        }
+        else if (transform.position.x >= 11.14)
+        {
+            transform.position = new Vector3(-11.24f, transform.position.y, 0);
+        }
+        else if (transform.position.x <= -11.24f)
+        {
+            transform.position = new Vector3(11.14f, transform.position.y, 0);
+        }
     }
+    private void LaserCooldown()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > canFire)
+        {
+            canFire = Time.time + fireRate;
+            Instantiate(laserPrefab, transform.position + new Vector3(0, 1.3f, 0), Quaternion.identity);
+        }
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
 }
