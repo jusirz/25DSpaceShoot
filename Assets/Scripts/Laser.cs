@@ -9,9 +9,7 @@ public class Laser : MonoBehaviour
     void Update()
     {
         laserMove();
-
     }
-
     private void laserMove()
     {
         transform.Translate(laserSpeed * Vector3.up * Time.deltaTime);
