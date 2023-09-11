@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private float _speed = 8f;
     private float fireRate = .25f;
     private float canFire = -.1f;
-    public GameObject laserPrefab;
+    public GameObject laser;
     private int _lives = 3;
     [SerializeField]
     private Spawn_Manager spawnManager;
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > canFire)
         {
             canFire = Time.time + fireRate;
-            Instantiate(laserPrefab, transform.position + new Vector3(0, 1.3f, 0), Quaternion.identity);
+            Instantiate(laser, transform.position + new Vector3(0, 1.3f, 0), Quaternion.identity);
         }
     }
     public void Damage()
