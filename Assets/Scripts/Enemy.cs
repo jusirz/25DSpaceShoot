@@ -6,15 +6,12 @@ public class Enemy : MonoBehaviour
 {
     public int enemyYMove = 4;
     private float posXRand;
+    
 
-
-    // Start is called before the first frame update
     void Start()
     {
         
     }
-
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(enemyYMove * Time.deltaTime * Vector3.down);
@@ -39,12 +36,9 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
         if (other.tag == "Laser")
-        {
-            
+        {  
             Destroy(this.gameObject);
             Destroy(other.gameObject);
-
-
         }
 
 

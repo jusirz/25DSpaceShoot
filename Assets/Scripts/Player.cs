@@ -10,17 +10,26 @@ public class Player : MonoBehaviour
     private float canFire = -.1f;
     public GameObject laserPrefab;
     private int _lives = 3;
+    [SerializeField]
+    private Spawn_Manager spawnManager;
+
+
 
     void Start()
     {
         StrtPos();
+        spawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn_Manager>();
+
+        if (spawnManager = null)
+        {
+            Debug.LogError("Spawn Manager is Null");
+        }
     }
 
     void Update()
     {
         CalcMove();
         LaserCooldown();
-
     }
 
     private void StrtPos()
@@ -63,7 +72,9 @@ public class Player : MonoBehaviour
         _lives--;
         if (_lives < 1)
         {
+            spawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn_Manager>();
             Destroy(this.gameObject);
+            spawnManager.StopSpawn();
         }
     }
 
