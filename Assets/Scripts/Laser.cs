@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public int laserSpeed = 10;
+    [SerializeField]
+    private int _laserSpeed = 10;
 
     void Update()
     {
-        laserMove();
+        LaserMove();
     }
-    private void laserMove()
+    private void LaserMove()
     {
-        transform.Translate(laserSpeed * Vector3.up * Time.deltaTime);
+        transform.Translate(_laserSpeed * Vector3.up * Time.deltaTime);
         if (transform.position.y > 7)
         {
             Destroy(this.gameObject);

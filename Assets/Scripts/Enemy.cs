@@ -4,43 +4,53 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int enemyYMove = 4;
-    private float posXRand;
-    
+    [SerializeField]
+    private int _enemyYMove = 4;
+    private float _posXRand;
+    [SerializeField]
+    public Player _player;
+
+
 
     void Start()
     {
-        
+        _player = GameObject.Find("Player").GetComponent<Player>();
     }
     void Update()
     {
-        transform.Translate(enemyYMove * Time.deltaTime * Vector3.down);
+        transform.Translate(_enemyYMove * Time.deltaTime * Vector3.down);
         if (transform.position.y < -5.2f)
         {
-            posXRand = Random.Range(-9.45f, 9.67f);
-            transform.position = new Vector3(posXRand, 7.18f, transform.position.z);
+            _posXRand = Random.Range(-9.45f, 9.67f);
+            transform.position = new Vector3(_posXRand, 7.18f, transform.position.z);
         }
 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.tag == "Player")
         {
-            Player player = other.transform.GetComponent<Player>();
-
-            if (player != null)
+            if (_player != null)
             {
-                player.Damage();   
+                _player.Damage();
+                Debug.Log("Damage to player.");
             }
             Destroy(this.gameObject);
         }
+
         if (other.tag == "Laser")
-        {  
-            Destroy(this.gameObject);
+        {
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            _player.AddScore(1);
+
         }
 
 
     }
+
+
+
 }

@@ -3,7 +3,16 @@ guid: bed070aa2dcc8704fada1026ce526060
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _enemyContainer: {instanceID: 0}
+  - _enemytoSpawn: {fileID: 3525161138011714997, guid: 9b9ad2c45775f2e46986c776802aca67,
+      type: 3}
+  - _TriplePowerUp: {fileID: 8028076547673668814, guid: 90687a2a0a6d6894f9df8a68cfca7cff,
+      type: 3}
+  - _SpeedPowerUp: {fileID: 4344739763083354080, guid: d1adaf0f98225024ba6b3050fb56b230,
+      type: 3}
+  - _ShieldPowerUp: {fileID: 7363827548171337278, guid: e0dc4f10a2734424b8088e61c8173c28,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
