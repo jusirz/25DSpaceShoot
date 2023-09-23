@@ -103,10 +103,15 @@ public class Player : MonoBehaviour
 
         if (_lives < 1)
         {
-            _uiManager.GameOver();
-            _spawnManager.StopSpawn();
-            Destroy(this.gameObject);
+            PlayerGameOverSequence();
         }
+    }
+
+    private void PlayerGameOverSequence()
+    {
+        _uiManager.GameOver();
+        _spawnManager.StopSpawn();
+        Destroy(this.gameObject);
     }
     public void FlipTripleShot()
     {
