@@ -8,7 +8,14 @@ public class PowerUp : MonoBehaviour
     private float _tripleshotspeed = 3.0f;
     [SerializeField]
     private int _powerupID; //0 = tripleshot 1 = speed 2 = shield
+    [SerializeField]
+    private AudioClip _powerUpSoundSource;
 
+    private void Start()
+    {
+        
+        
+    }
     void Update()
     {
         PowerUpMovement();
@@ -23,11 +30,18 @@ public class PowerUp : MonoBehaviour
             Debug.Log("Destroyed power up");
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private IEnumerator PowerUpSound()
+    {
+        
+        yield return new WaitForSeconds(2f);
+    }
+    public void OnTriggerEnter2D(Collider2D other)
     {
         Player player = other.transform.GetComponent<Player>();
         if (other.tag == "Player")
         {
+            AudioSource.PlayClipAtPoint(_powerUpSoundSource, transform.position);
             if (player != null)
             {
                 switch (_powerupID)
@@ -48,11 +62,14 @@ public class PowerUp : MonoBehaviour
                         Debug.Log("Powerup Undefined in switch.");
                         break;
                 }
+
                 Destroy(this.gameObject);
 
             }
 
 
+
         }
+        
     }
 }

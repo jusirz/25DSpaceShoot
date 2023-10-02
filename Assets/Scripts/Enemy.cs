@@ -9,13 +9,24 @@ public class Enemy : MonoBehaviour
     private float _posXRand;
     [SerializeField]
     public Player _player;
+    public Animator _explodeEnemy;
+    public BoxCollider2D _enemyCollider;
+    private AudioSource _explosionSourceEnemy;
+  
+    
 
 
 
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _explodeEnemy = GetComponent<Animator>();
+        _enemyCollider = GetComponent<BoxCollider2D>();
+        _explosionSourceEnemy = GetComponent<AudioSource>();
+
+
     }
+
     void Update()
     {
         transform.Translate(_enemyYMove * Time.deltaTime * Vector3.down);
@@ -29,7 +40,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+
         if (other.tag == "Player")
         {
             if (_player != null)
@@ -37,19 +48,28 @@ public class Enemy : MonoBehaviour
                 _player.Damage();
                 Debug.Log("Damage to player.");
             }
-            Destroy(this.gameObject);
+            _explodeEnemy.SetTrigger("EnemyExplosion");
+            _explosionSourceEnemy.Play();
+            Destroy(this.gameObject, 2.5f);
+            
+            
+
         }
 
         if (other.tag == "Laser")
         {
+            _explodeEnemy.SetTrigger("EnemyExplosion");
+            Destroy(_enemyCollider);
+            _enemyYMove= 1;
             Destroy(other.gameObject);
-            Destroy(this.gameObject);
+            _explosionSourceEnemy.Play();
+            Destroy(this.gameObject, 2.5f);
             _player.AddScore(1);
-
         }
 
 
     }
+
 
 
 

@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     private bool _gameOverCheck = false;
     [SerializeField]
     private GameManager _gameManager;
+    [SerializeField]
+    private GameObject _asteroidStart;
 
     void Start()
     {
@@ -54,6 +56,18 @@ public class UIManager : MonoBehaviour
 
         }
 
+    }
+
+    public void AsteroidStartMessageFlip(bool active)
+    {
+        if (active == true)
+        {
+            _asteroidStart.SetActive(true);
+        }
+        else if (active == false)
+        {
+            _asteroidStart.SetActive(false);
+        }
     }
 
 }
