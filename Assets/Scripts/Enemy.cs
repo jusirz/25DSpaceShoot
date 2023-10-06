@@ -12,8 +12,10 @@ public class Enemy : MonoBehaviour
     public Animator _explodeEnemy;
     public BoxCollider2D _enemyCollider;
     private AudioSource _explosionSourceEnemy;
-  
-    
+    [SerializeField]
+    private GameObject _enemyShotPreFab;
+
+
 
 
 
@@ -23,6 +25,8 @@ public class Enemy : MonoBehaviour
         _explodeEnemy = GetComponent<Animator>();
         _enemyCollider = GetComponent<BoxCollider2D>();
         _explosionSourceEnemy = GetComponent<AudioSource>();
+     
+        StartCoroutine(EnemyLaserSpawn());
 
 
     }
@@ -51,20 +55,32 @@ public class Enemy : MonoBehaviour
             _explodeEnemy.SetTrigger("EnemyExplosion");
             _explosionSourceEnemy.Play();
             Destroy(this.gameObject, 2.5f);
-            
-            
-
         }
 
         if (other.tag == "Laser")
         {
             _explodeEnemy.SetTrigger("EnemyExplosion");
             Destroy(_enemyCollider);
-            _enemyYMove= 1;
+            _enemyYMove = 1;
             Destroy(other.gameObject);
             _explosionSourceEnemy.Play();
             Destroy(this.gameObject, 2.5f);
             _player.AddScore(1);
+        }
+
+
+    }
+
+    public IEnumerator EnemyLaserSpawn()
+    {
+        while (true)
+        {
+            float a = Random.Range(2f, 6f);
+            yield return new WaitForSeconds(a);
+            Vector3 _enemyLaserPos = transform.position;
+            GameObject _newEnemyLaser = Instantiate(_enemyShotPreFab, _enemyLaserPos, Quaternion.identity);
+            float b = Random.Range(1f, 3f);
+            yield return new WaitForSeconds(b);
         }
 
 

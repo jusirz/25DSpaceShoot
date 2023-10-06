@@ -48,10 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88127e5a428415144b36f1aa899f1899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyYMove: 4
+  _enemyYMove: 3
   _player: {fileID: 0}
   _explodeEnemy: {fileID: 0}
   _enemyCollider: {fileID: 0}
+  _enemyShotPreFab: {fileID: 4073239621906545584, guid: 5072a412bfb23824ebd3356b650410fc,
+    type: 3}
 --- !u!212 &7172460782859632634
 SpriteRenderer:
   m_ObjectHideFlags: 0
