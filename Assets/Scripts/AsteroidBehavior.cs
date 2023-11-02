@@ -36,20 +36,20 @@ public class AsteroidBehavior : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            StartCoroutine(_explodeTimer());
+            StartCoroutine(ExplodeTimer());
             Destroy(other.gameObject);
-            StopCoroutine(_explodeTimer());
+            StopCoroutine(ExplodeTimer());
             _uiManager.GameOver();
         }
-        else if (other.tag == "Laser")
+        else if (other.CompareTag("Laser"))
         {
-            StartCoroutine(_explodeTimer());
+            StartCoroutine(ExplodeTimer());
             Destroy(this.gameObject);
             Destroy(other.gameObject);
             _uiManager.AsteroidStartMessageFlip(false);
-            StopCoroutine(_explodeTimer());
+            StopCoroutine(ExplodeTimer());
             _spawnManager.StartSpawnEngine();
         }
     }
@@ -73,7 +73,7 @@ public class AsteroidBehavior : MonoBehaviour
         }
     }
 
-    public IEnumerator _explodeTimer()
+    public IEnumerator ExplodeTimer()
     {
         Vector3 _spawnExplosion = this.gameObject.transform.position;
         Instantiate(_explosion, _spawnExplosion, Quaternion.identity);

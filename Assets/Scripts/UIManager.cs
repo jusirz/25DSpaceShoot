@@ -20,13 +20,29 @@ public class UIManager : MonoBehaviour
     private GameManager _gameManager;
     [SerializeField]
     private GameObject _asteroidStart;
+    [SerializeField]
+    private GameObject _shieldCount1;
+    [SerializeField]
+    private GameObject _shieldCount2;
+    [SerializeField]
+    private GameObject _shieldCount3;
+    private Player _player;
+    [SerializeField]
+    private Text _ammoNumber;
+    [SerializeField]
+    private GameObject _ammoOut;
+    [SerializeField]
+    private Slider _thrusterSlider;
+    private float _speedSliderValue;
 
     void Start()
     {
         _scoreText.text = "Score: " + 0;
+        _ammoNumber.text = "" + 0;
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
-    }
+        _player = GameObject.Find("Player").GetComponent<Player>();
 
+    }
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore;
@@ -35,6 +51,28 @@ public class UIManager : MonoBehaviour
     public void UpdateLives(int currentLives)
     {
         _livesImg.sprite = _liveSprites[currentLives];
+    }
+    public void UpdateAmmo(int playerAmmo)
+    {
+        _ammoNumber.text = "" + playerAmmo;
+    }
+
+    public void SpeedUpdate(float speedValue)
+    {
+        
+        _speedSliderValue = speedValue;
+        if (_speedSliderValue == 8f)
+        {
+            _thrusterSlider.value = 1;
+        }
+        else if (_speedSliderValue == 11f)
+        {
+            _thrusterSlider.value = 2;
+        }
+        else if (_speedSliderValue == 14f)
+        {
+            _thrusterSlider.value = 3;
+        }
     }
 
     public void GameOver()
@@ -53,9 +91,20 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(.5f);
             _gameOver.SetActive(false);
             yield return new WaitForSeconds(.5f);
-
         }
 
+    }
+
+    public void OutAmmoSwitch(bool ammoswitch)
+    {
+        if (ammoswitch == true)
+        {
+            _ammoOut.SetActive(true);
+        }
+        if (ammoswitch == false)
+        {
+            _ammoOut.SetActive(false);
+        }
     }
 
     public void AsteroidStartMessageFlip(bool active)
@@ -67,6 +116,29 @@ public class UIManager : MonoBehaviour
         else if (active == false)
         {
             _asteroidStart.SetActive(false);
+        }
+    }
+
+    public void ShieldUIActivate()
+    {
+        _shieldCount1.SetActive(true);
+        _shieldCount2.SetActive(true);
+        _shieldCount3.SetActive(true);
+    }
+
+    public void ShieldUIChange()
+    {
+        switch (_player._shieldDamage)
+        {
+            case 1:
+                _shieldCount3.SetActive(false);
+                break;
+            case 2:
+                _shieldCount2.SetActive(false);
+                break;
+            case 3:
+                _shieldCount1.SetActive(false);
+                break;
         }
     }
 

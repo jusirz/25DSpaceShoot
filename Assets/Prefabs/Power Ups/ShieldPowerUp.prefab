@@ -123,9 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3b7bc716a438b4bba5969e5b048557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tripleshotspeed: 3
+  _powerUpSpeed: 3
   _powerupID: 2
   _powerUpSoundSource: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
+  _laserObj: {fileID: 4671597575392382861, guid: c184a50289bea8841bbc662017543b7d,
+    type: 3}
 --- !u!50 &6840847551469065366
 Rigidbody2D:
   serializedVersion: 4

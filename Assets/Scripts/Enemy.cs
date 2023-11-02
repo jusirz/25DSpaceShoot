@@ -7,13 +7,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int _enemyYMove = 4;
     private float _posXRand;
-    [SerializeField]
     public Player _player;
     public Animator _explodeEnemy;
     public BoxCollider2D _enemyCollider;
     private AudioSource _explosionSourceEnemy;
     [SerializeField]
     private GameObject _enemyShotPreFab;
+    private bool _enemyAlive = true;
 
 
 
@@ -45,8 +45,9 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
+            _enemyAlive = false;
             if (_player != null)
             {
                 _player.Damage();
@@ -57,8 +58,9 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject, 2.5f);
         }
 
-        if (other.tag == "Laser")
+        if (other.CompareTag("Laser"))
         {
+            _enemyAlive = false;
             _explodeEnemy.SetTrigger("EnemyExplosion");
             Destroy(_enemyCollider);
             _enemyYMove = 1;
@@ -73,16 +75,18 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator EnemyLaserSpawn()
     {
-        while (true)
+        while (_enemyAlive == true)
         {
             float a = Random.Range(2f, 6f);
             yield return new WaitForSeconds(a);
+            if (_enemyAlive == true)
+            {
             Vector3 _enemyLaserPos = transform.position;
             GameObject _newEnemyLaser = Instantiate(_enemyShotPreFab, _enemyLaserPos, Quaternion.identity);
+            }
             float b = Random.Range(1f, 3f);
             yield return new WaitForSeconds(b);
         }
-
 
     }
 
