@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     private GameObject _ammoOut;
     [SerializeField]
     private Slider _thrusterSlider;
-    private float _speedSliderValue;
+    private float _thrustSliderValue;
 
     void Start()
     {
@@ -57,22 +57,42 @@ public class UIManager : MonoBehaviour
         _ammoNumber.text = "" + playerAmmo;
     }
 
-    public void SpeedUpdate(float speedValue)
+    public void ThrusterUpdate(float thrustValue)
     {
-        
-        _speedSliderValue = speedValue;
-        if (_speedSliderValue == 8f)
+        switch (thrustValue)
         {
-            _thrusterSlider.value = 1;
+            case 1:
+                _thrusterSlider.value = 1;
+                break;
+            case 2:
+                _thrusterSlider.value = 2;
+                break;
+            case 3:
+                _thrusterSlider.value = 3;
+                break;
+            case 4:
+                _thrusterSlider.value = 4;
+                break;
+            case 5:
+                _thrusterSlider.value = 5;
+                break;
+            case 6:
+                _thrusterSlider.value = 6;
+                break;
+            case 7:
+                _thrusterSlider.value = 7;
+                break;
+            case 8:
+                _thrusterSlider.value = 8;
+                break;
+            case 9:
+                _thrusterSlider.value = 9;
+                break;
+            case 10:
+                _thrusterSlider.value = 10;
+                break;
         }
-        else if (_speedSliderValue == 11f)
-        {
-            _thrusterSlider.value = 2;
-        }
-        else if (_speedSliderValue == 14f)
-        {
-            _thrusterSlider.value = 3;
-        }
+
     }
 
     public void GameOver()

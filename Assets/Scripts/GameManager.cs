@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private bool _isGameOver;
+    private int _enemyCount = 0;
 
 
     private void Update()
@@ -23,6 +24,11 @@ public class GameManager : MonoBehaviour
     {
         _isGameOver = true;
 
+    }
+
+    private void EnemyNumberIncrease()
+    {
+        _enemyCount++;
     }
 
 }

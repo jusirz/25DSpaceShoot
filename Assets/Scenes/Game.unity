@@ -404,7 +404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -213, y: 207}
+  m_AnchoredPosition: {x: -303, y: 107}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &265389895
@@ -696,7 +696,7 @@ Transform:
   m_GameObject: {fileID: 310194151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.132, y: 0.696, z: 0}
-  m_LocalScale: {x: 1.0828913, y: 1.128942, z: 1}
+  m_LocalScale: {x: 1.1201844, y: 1.167821, z: 1.0344385}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1289,7 +1289,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -259, y: 192}
+  m_AnchoredPosition: {x: -348, y: 89}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957857672
@@ -1336,9 +1336,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2816873}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 3
+  m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 1
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1922,8 +1922,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyContainer: {fileID: 1464205822}
-  _enemytoSpawn: {fileID: 1490230964956487929, guid: 3fa8f720727caa441b24ae1a87cd1e96,
-    type: 3}
   _TriplePowerUp: {fileID: 8028076547673668814, guid: 90687a2a0a6d6894f9df8a68cfca7cff,
     type: 3}
   _SpeedPowerUp: {fileID: 4344739763083354080, guid: d1adaf0f98225024ba6b3050fb56b230,
@@ -1945,6 +1943,10 @@ MonoBehaviour:
   _ammoSpwawnTimer: 60
   _healthSpawnTimer: 40
   _waveShotSpawnTimer: 10
+  _enemytoSpawn1: {fileID: 1490230964956487929, guid: 3fa8f720727caa441b24ae1a87cd1e96,
+    type: 3}
+  _enemytoSpawn2: {fileID: 3540057583348185546, guid: f46374b21f6a16742819af9b0b7fd129,
+    type: 3}
 --- !u!4 &1331470197
 Transform:
   m_ObjectHideFlags: 0
@@ -2596,8 +2598,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628263027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: -2.1, z: 0}
-  m_LocalScale: {x: 0.7966616, y: 0.66, z: 0.66}
+  m_LocalPosition: {x: -0.61, y: -2.69, z: 0}
+  m_LocalScale: {x: 0.65172493, y: 0.53992623, z: 0.53992623}
   m_Children:
   - {fileID: 594241846}
   - {fileID: 171187296}

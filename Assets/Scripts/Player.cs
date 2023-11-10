@@ -48,6 +48,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _cameraobject;
 
+    private int _thrusterCool = 10;
+    private bool _thrustActive;
+
 
 
     void Start()
@@ -58,6 +61,7 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _audioSource.clip = _laserSound;
         _cameraobject = GameObject.FindWithTag("MainCamera");
+        _uiManager.UpdateAmmo(_ammo);
     }
 
     void Update()
@@ -65,7 +69,8 @@ public class Player : MonoBehaviour
         CalcMove();
         LaserCooldown();
         AmmoCommunicate();
-        SpeedCommunicate(_speed);
+        ThrustCommunicate();
+
     }
 
     private void StrtPos()
@@ -74,21 +79,26 @@ public class Player : MonoBehaviour
     }
     private void CalcMove()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _thrusterCool > 1)
         {
+            _thrustActive = true;
             _speed += 3;
+            StartCoroutine(ThrusterHeatUp());
+            StopCoroutine(ThrusterHeatUp());
+
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            _thrustActive = false;
             _speed -= 3;
+            StartCoroutine(ThrusterCoolDown());
+            StopCoroutine(ThrusterCoolDown());
         }
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-
         transform.Translate(_speed * horizontalInput * Time.deltaTime * Vector3.right);
         transform.Translate(_speed * Time.deltaTime * verticalInput * Vector3.up);
-
         if (transform.position.y > 5)
         {
             transform.position = new Vector3(transform.position.x, 5, 0);
@@ -120,6 +130,35 @@ public class Player : MonoBehaviour
             else
             {
                 LaserShotSelection();
+            }
+        }
+    }
+
+    private IEnumerator ThrusterHeatUp()
+    {
+        bool turnoff = false;
+        while (_thrustActive == true && turnoff == false)
+        {
+            _thrusterCool--;
+            yield return new WaitForSeconds(.5f);
+            if (_thrusterCool == 1)
+            {
+                turnoff = true;           
+            }
+        }
+        
+    }
+
+    private IEnumerator ThrusterCoolDown()
+    {
+        bool turnoff = false;
+        while (_thrustActive == false && turnoff == false)
+        {
+            _thrusterCool++;
+            yield return new WaitForSeconds(.5f);
+            if (_thrusterCool == 10)
+            {
+                turnoff = true;
             }
         }
     }
@@ -158,11 +197,7 @@ public class Player : MonoBehaviour
         _score += points;
         _uiManager.UpdateScore(_score);
     }
-    public void NewAmmo(int _bullets)
-    {
-        _bullets = _ammo;
-        _uiManager.UpdateAmmo(_bullets);
-    }
+    
     private void PlayerGameOverSequence()
     {
         _uiManager.GameOver();
@@ -170,10 +205,9 @@ public class Player : MonoBehaviour
         Destroy(this.gameObject);
     }
     
-    public void SpeedCommunicate(float _speedComm)
+    public void ThrustCommunicate()
     {
-        _speedComm = _speed;
-        _uiManager.SpeedUpdate(_speedComm);
+        _uiManager.ThrusterUpdate(_thrusterCool);
     }
 
     //power up stuff here
@@ -217,13 +251,13 @@ public class Player : MonoBehaviour
     public void AmmoIncrease(int _increaseAmount)
     {
         _ammo += _increaseAmount;
-        NewAmmo(_increaseAmount);
+        _uiManager.UpdateAmmo(_ammo);
     }
 
     public void AmmoDecrease(int _decreaseAmount)
     {
         _ammo -= _decreaseAmount;
-        NewAmmo(_decreaseAmount);
+        _uiManager.UpdateAmmo(_ammo);
     }
 
     public void HealthIncrease()
@@ -295,22 +329,21 @@ public class Player : MonoBehaviour
                 PlayerGameOverSequence();
                 break;
             case 1:
-                    _playerdamage2.SetActive(true);
-                    _playerdamage1.SetActive(true);
+                _playerdamage2.SetActive(true);
+                _playerdamage1.SetActive(true);
                 break;
             case 2:
-                    _playerdamage1.SetActive(true);
-                    _playerdamage2.SetActive(false);
+                _playerdamage1.SetActive(true);
+                _playerdamage2.SetActive(false);
                 break;
             case 3:
-                    _playerdamage1.SetActive(false);
+                _playerdamage1.SetActive(false);
                 break;
             default:
                 Debug.Log("Player damage visualization is broken");
                 break;
         }
     }
-
     public void CameraShake()
     {
         _cameraobject.GetComponent<CameraBehavior>().ActiveCameraShake();

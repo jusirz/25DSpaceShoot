@@ -7,13 +7,13 @@ public class EnemyLaser : MonoBehaviour
     private readonly float _enemyLaserSpeed = 7;
     [SerializeField]
     private GameObject _player;
-    private Player _playerPlayer;
+
 
     void Update()
     {
-        EnemyLaserMove();
         _player = GameObject.Find("Player");
-        _playerPlayer = _player.GetComponent<Player>();
+      
+        EnemyLaserMove();
     }
 
     private void EnemyLaserMove()
@@ -26,15 +26,16 @@ public class EnemyLaser : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.CompareTag("Player"))
         {
-            _playerPlayer.Damage();
+            _player.GetComponent<Player>().Damage();
             Destroy(this.gameObject);
             Debug.Log("Enemy Laser Collided with player");
         }
         else if (other.CompareTag("shield"))
         {
-            _playerPlayer.Damage();
+            _player.GetComponent<Player>().Damage();
             Debug.Log("Shield was hit");
         }
     }

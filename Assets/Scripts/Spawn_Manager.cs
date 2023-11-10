@@ -6,8 +6,7 @@ public class Spawn_Manager : MonoBehaviour
 {
     [SerializeField]
     private GameObject _enemyContainer;
-    [SerializeField]
-    private GameObject _enemytoSpawn;
+
     [SerializeField]
     private GameObject _TriplePowerUp;
     [SerializeField]
@@ -39,6 +38,16 @@ public class Spawn_Manager : MonoBehaviour
     private float _healthSpawnTimer = 40f;
     [SerializeField]
     private float _waveShotSpawnTimer = 100f;
+
+    [Header("Enemy Info")]
+    [SerializeField]
+    private GameObject _enemytoSpawn1;
+    [SerializeField]
+    private GameObject _enemytoSpawn2;
+
+    private bool _enemiesSpawned;
+ 
+    
     public void Start()
     {
         SpawnAsteroid();
@@ -47,18 +56,10 @@ public class Spawn_Manager : MonoBehaviour
         _ammoSpwawnTimer = 25f;
         _enemySpawnTimer = 2f;
         _speedBoostSpawnTimer = 15f;
+
     }
 
-    private IEnumerator SpawnEnemy()
-    {
-        while (_alive == true)
-        {
-            Vector3 enemySpawnPos = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
-            GameObject newEnemy = Instantiate(_enemytoSpawn, enemySpawnPos, Quaternion.identity);
-            newEnemy.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(_enemySpawnTimer);
-        }
-    }
+
 
     private IEnumerator TripleShotSpawn()
     {
@@ -127,6 +128,18 @@ public class Spawn_Manager : MonoBehaviour
 
     }
 
+    private IEnumerator EnemySpawnCounter()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(3f);
+            _enemiesSpawned = false;
+            yield return new WaitForSeconds(5f);
+            _enemiesSpawned = true;
+        }
+    }
+
+
     public void StopSpawn()
     {
         _alive = false;
@@ -137,10 +150,13 @@ public class Spawn_Manager : MonoBehaviour
         StopCoroutine(AmmoUpSpawn());
         StopCoroutine(HealthSpawn());
         StopCoroutine(WaveShotSpawn());
+        StopCoroutine(EnemySpawnCounter());
+
         Destroy(gameObject);
     }
     public void StartSpawnEngine()
     {
+        StartCoroutine(EnemySpawnCounter());
         StartCoroutine(SpawnEnemy());
         StartCoroutine(TripleShotSpawn());
         StartCoroutine(SpeedBoostSpawn());
@@ -148,6 +164,7 @@ public class Spawn_Manager : MonoBehaviour
         StartCoroutine(AmmoUpSpawn());
         StartCoroutine(HealthSpawn());
         StartCoroutine(WaveShotSpawn());
+   
     }
 
 }

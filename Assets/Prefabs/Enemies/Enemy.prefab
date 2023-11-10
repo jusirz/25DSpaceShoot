@@ -49,11 +49,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyYMove: 3
+  _enemyXMove: -4
   _player: {fileID: 0}
   _explodeEnemy: {fileID: 0}
   _enemyCollider: {fileID: 0}
   _enemyShotPreFab: {fileID: 4073239621906545584, guid: 5072a412bfb23824ebd3356b650410fc,
     type: 3}
+  _spawnManager: {fileID: 0}
+  _enemyType: 1
 --- !u!212 &7172460782859632634
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -138,7 +141,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000071525574, y: 0.08157015}
+  m_Offset: {x: -0.013991833, y: -0.058358192}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -149,7 +152,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2766871, y: 2.905942}
+  m_Size: {x: 1.8009319, y: 2.6260853}
   m_EdgeRadius: 0
 --- !u!95 &288346955710273479
 Animator:
