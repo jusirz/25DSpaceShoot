@@ -46,19 +46,47 @@ public class Spawn_Manager : MonoBehaviour
     private GameObject _enemytoSpawn2;
 
     private bool _enemiesSpawned;
- 
-    
+    public UIManager _UIManager;
+    public GameManager _GameManager;
+    private int _stageSelector;
+
+
     public void Start()
     {
         SpawnAsteroid();
-        _tripleShotSpawnTimer = Random.Range(18f, 25);
-        _shieldSpawnTimer = Random.Range(30f, 40f);
-        _ammoSpwawnTimer = 25f;
-        _enemySpawnTimer = 2f;
-        _speedBoostSpawnTimer = 15f;
+        SetTimers();
+        _GameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        _UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
 
     }
 
+    private void SetTimers()
+    {
+        _tripleShotSpawnTimer = Random.Range(18f, 25);
+        _shieldSpawnTimer = Random.Range(30f, 40f);
+        _ammoSpwawnTimer = 25f;
+        _enemySpawnTimer = 8f;
+        _speedBoostSpawnTimer = 15f;
+    }
+    private IEnumerator SpawnEnemy()
+    {
+        while (_enemiesSpawned == false)
+        {
+            Vector3 enemyspawnpos1 = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
+            GameObject newEnemy = Instantiate(_enemytoSpawn1, enemyspawnpos1, Quaternion.identity);
+            newEnemy.transform.parent = _enemyContainer.transform;
+            yield return new WaitForSeconds(_enemySpawnTimer);
+        }
+
+        while (_enemiesSpawned == false)
+        {
+            Vector3 enemyspawnpos2 = new Vector3(-11.7f, Random.Range(2.49f, 6.92f), 0);
+            GameObject newEnemy = Instantiate(_enemytoSpawn2, enemyspawnpos2, Quaternion.identity);
+            newEnemy.transform.parent = _enemyContainer.transform;
+            yield return new WaitForSeconds(_enemySpawnTimer);
+        }
+    }
 
 
     private IEnumerator TripleShotSpawn()
@@ -137,6 +165,39 @@ public class Spawn_Manager : MonoBehaviour
             yield return new WaitForSeconds(5f);
             _enemiesSpawned = true;
         }
+    }
+
+    public void StageSpawn(int stageselect)
+    {
+        bool UIonoff = true;
+        _stageSelector = stageselect;
+        switch (_stageSelector)
+        {
+            case 1:
+                _enemySpawnTimer = 7f;
+                if (UIonoff == true)
+                {
+                    _UIManager.GetComponent<UIManager>().StartEnemyWave();
+                }
+                UIonoff = false;
+                break;
+            case 2:
+                _enemySpawnTimer = 5.5f;
+                _UIManager.GetComponent<UIManager>().StartEnemyWave();
+                break;
+            case 3:
+                _enemySpawnTimer = 4f;
+                _UIManager.GetComponent<UIManager>().StartEnemyWave();
+                break;
+            case 4:
+                _enemySpawnTimer = 2f;
+                _UIManager.GetComponent<UIManager>().StartEnemyWave();
+                break;
+            default:
+                break;
+        }
+
+        
     }
 
 

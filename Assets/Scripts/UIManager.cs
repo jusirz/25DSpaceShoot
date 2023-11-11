@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     private GameObject _gameOver;
     [SerializeField]
     private GameObject _restartMessage;
+    [SerializeField]
+    private GameObject _newEnemyWaveMessage;
     private bool _gameOverCheck = false;
     [SerializeField]
     private GameManager _gameManager;
@@ -112,7 +114,21 @@ public class UIManager : MonoBehaviour
             _gameOver.SetActive(false);
             yield return new WaitForSeconds(.5f);
         }
+    }
 
+    public void StartEnemyWave()
+    {
+        StartCoroutine(NewEnemyWaveFlicker());
+        StopCoroutine(NewEnemyWaveFlicker());
+    }
+    private  IEnumerator NewEnemyWaveFlicker()
+    {
+
+     _newEnemyWaveMessage.SetActive(true);
+     yield return new WaitForSeconds(4f);
+     _newEnemyWaveMessage.SetActive(false);
+        yield return null;
+        Debug.Log("EnemyWave flicker ran");
     }
 
     public void OutAmmoSwitch(bool ammoswitch)

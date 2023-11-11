@@ -6,7 +6,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private bool _isGameOver;
-    private int _enemyCount = 0;
+    private float _gameSeconds;
+    private int _stageChoice;
+    public Spawn_Manager _SpawnManager;
+
+
+    private void Start()
+    {
+        _SpawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn_Manager>();
+    }
+
+
 
 
     private void Update()
@@ -19,16 +29,34 @@ public class GameManager : MonoBehaviour
         {
             Application.Quit();
         }
+        _gameSeconds = Time.time;
+        StageManager();
     }
     public void GameOver()
     {
         _isGameOver = true;
-
     }
 
-    private void EnemyNumberIncrease()
+    public void StageManager()
     {
-        _enemyCount++;
-    }
 
+        if (_gameSeconds > 30f && _gameSeconds < 60f)
+        {
+            _stageChoice = 1;
+        }
+        else if (_gameSeconds > 60f && _gameSeconds < 180f)
+        {
+            _stageChoice = 2;
+        }
+        else if (_gameSeconds > 180f && _gameSeconds < 360f)
+        {
+            _stageChoice = 3;
+        }
+        else if (_gameSeconds > 360f)
+        {
+            _stageChoice = 4;
+        }
+        _SpawnManager.StageSpawn(_stageChoice);
+        Debug.Log("Stage choice is " + _stageChoice);
+    }
 }
