@@ -66,6 +66,9 @@ public class PowerUp : MonoBehaviour
                         player.ActivateLaserChange(2);
                         Debug.Log("Wave shot is active");
                         break;
+                    case 6:
+                        player.StartSlowDown();
+                        break;
                     default:
                         Debug.Log("Powerup Undefined in switch.");
                         break;

@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     public GameObject _ShieldVisual;
     [SerializeField]
     private GameObject _playerdamage1;
-    [SerializeField]
     private GameObject _playerdamage2;
     //ui stuff
     public UIManager _uiManager;
@@ -143,10 +142,10 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(.5f);
             if (_thrusterCool == 1)
             {
-                turnoff = true;           
+                turnoff = true;
             }
         }
-        
+
     }
 
     private IEnumerator ThrusterCoolDown()
@@ -197,14 +196,14 @@ public class Player : MonoBehaviour
         _score += points;
         _uiManager.UpdateScore(_score);
     }
-    
+
     private void PlayerGameOverSequence()
     {
         _uiManager.GameOver();
         _spawnManager.StopSpawn();
         Destroy(this.gameObject);
     }
-    
+
     public void ThrustCommunicate()
     {
         _uiManager.ThrusterUpdate(_thrusterCool);
@@ -321,7 +320,7 @@ public class Player : MonoBehaviour
     }
 
     private void VisualDamageChanger()
-    { 
+    {
 
         switch (_lives)
         {
@@ -348,5 +347,18 @@ public class Player : MonoBehaviour
     {
         _cameraobject.GetComponent<CameraBehavior>().ActiveCameraShake();
         Debug.Log("CameraShake in player");
+    }
+
+     private IEnumerator SlowDown()
+    {
+        _speed -= 5;
+        yield return new WaitForSeconds(5f);
+        _speed += 5;
+    }
+
+    public void StartSlowDown()
+    {
+        StartCoroutine(SlowDown());
+        StopCoroutine(SlowDown());
     }
 }

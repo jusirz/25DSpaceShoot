@@ -9,11 +9,15 @@ public class GameManager : MonoBehaviour
     private float _gameSeconds;
     private int _stageChoice;
     public Spawn_Manager _SpawnManager;
+    public UIManager _UIManager;
+
 
 
     private void Start()
     {
         _SpawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn_Manager>();
+        _UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
     }
 
 
@@ -57,6 +61,12 @@ public class GameManager : MonoBehaviour
             _stageChoice = 4;
         }
         _SpawnManager.StageSpawn(_stageChoice);
-        Debug.Log("Stage choice is " + _stageChoice);
+        EnemyWaveDisplay();
+        
+    }
+
+    public void EnemyWaveDisplay()
+    {
+        _UIManager.GetComponent<UIManager>().StartEnemyWave(_stageChoice);
     }
 }

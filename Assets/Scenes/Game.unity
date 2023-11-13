@@ -613,7 +613,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9fe6f40efddf0b64fb68a3382b14a4db, type: 3}
   _gameOver: {fileID: 526052295}
   _restartMessage: {fileID: 1135833880}
-  _newEnemyWaveMessage: {fileID: 1586180899}
+  _newEnemyWaveMessage: {fileID: 1586180901}
   _gameManager: {fileID: 1082368894}
   _asteroidStart: {fileID: 1830658991}
   _shieldCount1: {fileID: 1485726190}
@@ -1652,7 +1652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051283cae2f4c354fa76928e37a5f356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SpawnManager: {fileID: 0}
+  _SpawnManager: {fileID: 1331470196}
+  _UIManager: {fileID: 279018105}
 --- !u!4 &1082368895
 Transform:
   m_ObjectHideFlags: 0
@@ -1939,6 +1940,8 @@ MonoBehaviour:
     type: 3}
   _waveShot: {fileID: 3027030877251036733, guid: 7582ef8c8354e8b498f497d7a454ba6e,
     type: 3}
+  _slowPowerUp: {fileID: 9181968092832315277, guid: 833792df94ec74a4c935337e26d861b0,
+    type: 3}
   _enemySpawnTimer: 0
   _shieldSpawnTimer: 0
   _tripleShotSpawnTimer: 0
@@ -1946,11 +1949,11 @@ MonoBehaviour:
   _ammoSpwawnTimer: 60
   _healthSpawnTimer: 40
   _waveShotSpawnTimer: 10
+  _slowDownSpawnTimer: 30
   _enemytoSpawn1: {fileID: 1490230964956487929, guid: 3fa8f720727caa441b24ae1a87cd1e96,
     type: 3}
   _enemytoSpawn2: {fileID: 3540057583348185546, guid: f46374b21f6a16742819af9b0b7fd129,
     type: 3}
-  _UIManager: {fileID: 0}
   _GameManager: {fileID: 0}
 --- !u!4 &1331470197
 Transform:
@@ -2612,7 +2615,6 @@ MonoBehaviour:
     type: 3}
   _ShieldVisual: {fileID: 594241844}
   _playerdamage1: {fileID: 1468741540}
-  _playerdamage2: {fileID: 541455217}
   _uiManager: {fileID: 0}
   _lives: 3
   _score: 0
