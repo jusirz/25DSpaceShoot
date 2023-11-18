@@ -48,6 +48,12 @@ public class Spawn_Manager : MonoBehaviour
     private GameObject _enemytoSpawn1;
     [SerializeField]
     private GameObject _enemytoSpawn2;
+    [SerializeField]
+    private GameObject _enemytoSpawn3;
+    [SerializeField]
+    private GameObject _enemytoSpawn4;
+    [SerializeField]
+    private GameObject _enemySwarmSpawn;
 
 
     //private bool _enemySpawnedSwitch;
@@ -85,6 +91,21 @@ public class Spawn_Manager : MonoBehaviour
                 Vector3 enemyspawnpos2 = new Vector3(-11.7f, Random.Range(2.49f, 6.92f), 0);
                 GameObject newEnemy2 = Instantiate(_enemytoSpawn2, enemyspawnpos2, Quaternion.identity);
                 newEnemy2.transform.parent = _enemyContainer.transform;
+                break;
+            case 3:
+                Vector3 enemyspawnpos3 = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
+                GameObject newEnemy3 = Instantiate(_enemytoSpawn3, enemyspawnpos3, Quaternion.identity);
+                newEnemy3.transform.parent = _enemyContainer.transform;
+                break;
+            case 4:
+                Vector3 enemyspawnpos4 = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
+                GameObject newEnemy4 = Instantiate(_enemytoSpawn3, enemyspawnpos4, Quaternion.identity);
+                newEnemy4.transform.parent = _enemyContainer.transform;
+                break;
+            case 5:
+                Vector3 swarmspawnpos = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
+                GameObject newSwarm = Instantiate(_enemySwarmSpawn, swarmspawnpos, Quaternion.identity);
+                newSwarm.transform.parent = _enemyContainer.transform;
                 break;
         }
 
@@ -176,6 +197,9 @@ public class Spawn_Manager : MonoBehaviour
             yield return new WaitForSeconds(_enemySpawnTimer);
             _enemiesSpawned = 2;
             SpawnEnemy();
+            yield return new WaitForSeconds(_enemySpawnTimer);
+            _enemiesSpawned = 3;
+            SpawnEnemy();
         }
     }
 
@@ -217,6 +241,7 @@ public class Spawn_Manager : MonoBehaviour
     }
     public void StartSpawnEngine()
     {
+        SpawnEnemy();
         StartCoroutine(EnemySpawnCounter());
         StartCoroutine(TripleShotSpawn());
         StartCoroutine(SpeedBoostSpawn());

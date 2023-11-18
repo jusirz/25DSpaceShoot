@@ -1954,7 +1954,13 @@ MonoBehaviour:
     type: 3}
   _enemytoSpawn2: {fileID: 3540057583348185546, guid: f46374b21f6a16742819af9b0b7fd129,
     type: 3}
-  _GameManager: {fileID: 0}
+  _enemytoSpawn3: {fileID: 836843903757310087, guid: 3ee32a01ee5ce1045bddc1f1e1467ca1,
+    type: 3}
+  _enemytoSpawn4: {fileID: 5760177125172858755, guid: f34e54621ac83654ebf9a1e178513e69,
+    type: 3}
+  _enemySwarmSpawn: {fileID: 6136686453246620495, guid: cc55a12d35256084da7714186396dc37,
+    type: 3}
+  _GameManager: {fileID: 1082368894}
 --- !u!4 &1331470197
 Transform:
   m_ObjectHideFlags: 0
@@ -2432,7 +2438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1586180900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2449,7 +2455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -76.50003, y: -2.3307343}
+  m_AnchoredPosition: {x: 337, y: 174}
   m_SizeDelta: {x: 229.16742, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1586180901
@@ -2473,18 +2479,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 300
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: new enemy wave approaching
+  m_Text: 'enemy wave
+
+'
 --- !u!222 &1586180902
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2683,7 +2691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628263027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.61, y: -2.69, z: 0}
+  m_LocalPosition: {x: -0.21, y: -3.8, z: 0}
   m_LocalScale: {x: 0.65172493, y: 0.53992623, z: 0.53992623}
   m_Children:
   - {fileID: 594241846}
