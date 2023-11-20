@@ -8,18 +8,14 @@ public class RocketShot : MonoBehaviour
     [SerializeField]
     private GameObject _player;
 
-    // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player");
     }
-
-    // Update is called once per frame
     void Update()
     {
         RocketLaserMove();
     }
-
     private void RocketLaserMove()
     {
         transform.Translate(_rocketSpeed * Time.deltaTime * Vector3.down);
@@ -28,10 +24,8 @@ public class RocketShot : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.CompareTag("Player"))
         {
             _player.GetComponent<Player>().Damage();

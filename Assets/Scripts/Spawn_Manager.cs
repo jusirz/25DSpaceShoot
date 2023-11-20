@@ -191,7 +191,6 @@ public class Spawn_Manager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(_enemySpawnTimer);
             _enemiesSpawned = 1;
             SpawnEnemy();
             yield return new WaitForSeconds(_enemySpawnTimer);
@@ -200,6 +199,7 @@ public class Spawn_Manager : MonoBehaviour
             yield return new WaitForSeconds(_enemySpawnTimer);
             _enemiesSpawned = 3;
             SpawnEnemy();
+            yield return new WaitForSeconds(_enemySpawnTimer);
         }
     }
 

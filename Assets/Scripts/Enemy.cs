@@ -23,10 +23,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        if (_player != null)
-        {
-            _player = GameObject.Find("Player").GetComponent<Player>();
-        }
+        _player = GameObject.Find("Player").GetComponent<Player>();
         _explodeEnemy = GetComponent<Animator>();
         _enemyCollider = GetComponent<BoxCollider2D>();
         _explosionSourceEnemy = GetComponent<AudioSource>();
@@ -37,7 +34,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         EnemyMovement();
-        Debug.Log("third enemy is " + _thirdEnemy);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -64,11 +60,12 @@ public class Enemy : MonoBehaviour
             _enemyYMove = 1;
             Destroy(other.gameObject);
             _explosionSourceEnemy.Play();
-            Destroy(this.gameObject, 2.5f);
             if (_player != null)
             {
                 _player.AddScore(1);
+                Debug.Log("Score was added");
             }
+            Destroy(this.gameObject, 2.5f);
         if (other.CompareTag("shield"))
             {
                 _enemyAlive = false;
@@ -76,8 +73,8 @@ public class Enemy : MonoBehaviour
                 Destroy(_enemyCollider);
                 _enemyYMove = 1;
                 _explosionSourceEnemy.Play();
-                Destroy(this.gameObject, 2.5f);
                 _player.Damage();
+                Destroy(this.gameObject, 2.5f);
             }
 
         }
