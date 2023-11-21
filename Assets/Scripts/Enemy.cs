@@ -17,9 +17,16 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject _rocketShotPrefab;
     private bool _enemyAlive = true;
+
+    private bool _enemyShield = true;
+    [SerializeField]
+    private GameObject _enemyShieldObject;
+
+
     [SerializeField]
     private int _enemyType;
     private bool _thirdEnemy;
+
 
     void Start()
     {
@@ -38,35 +45,28 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("Player"))
+        if (_player != null || _enemyShield == false)
         {
-            _enemyAlive = false;
-            if (_player != null)
+            if (other.CompareTag("Player"))
             {
+                _enemyAlive = false;
                 _player.Damage();
-                Debug.Log("Damage to player.");
+                _explodeEnemy.SetTrigger("EnemyExplosion");
+                _explosionSourceEnemy.Play();
+                Destroy(this.gameObject, 2.5f);
             }
-            _explodeEnemy.SetTrigger("EnemyExplosion");
-            _explosionSourceEnemy.Play();
-            Destroy(this.gameObject, 2.5f);
-        }
-
-        if (other.CompareTag("Laser"))
-        {
-            _enemyAlive = false;
-            _explodeEnemy.SetTrigger("EnemyExplosion");
-            Destroy(_enemyCollider);
-            _enemyYMove = 1;
-            Destroy(other.gameObject);
-            _explosionSourceEnemy.Play();
-            if (_player != null)
+            if (other.CompareTag("Laser"))
             {
+                _enemyAlive = false;
+                _explodeEnemy.SetTrigger("EnemyExplosion");
+                Destroy(_enemyCollider);
+                _enemyYMove = 1;
+                Destroy(other.gameObject);
+                _explosionSourceEnemy.Play();
                 _player.AddScore(1);
-                Debug.Log("Score was added");
+                Destroy(this.gameObject, 2.5f);
             }
-            Destroy(this.gameObject, 2.5f);
-        if (other.CompareTag("shield"))
+            if (other.CompareTag("shield"))
             {
                 _enemyAlive = false;
                 _explodeEnemy.SetTrigger("EnemyExplosion");
@@ -76,11 +76,15 @@ public class Enemy : MonoBehaviour
                 _player.Damage();
                 Destroy(this.gameObject, 2.5f);
             }
-
         }
-
-
     }
+
+
+        public void EnemyShieldChange()
+    {
+        _enemyShield = false;
+    }
+
 
     public IEnumerator EnemyLaserSpawn()
     {
@@ -164,7 +168,7 @@ public class Enemy : MonoBehaviour
         {
             transform.Translate(_enemyYMove * Time.deltaTime * Vector3.down);
         }
-        else if(_thirdEnemy == false)
+        else if (_thirdEnemy == false)
         {
             transform.Translate(_enemyXMove * Time.deltaTime * Vector3.left);
         }
