@@ -23,7 +23,6 @@ public class CameraBehavior : MonoBehaviour
 
         while (Time.time <= _cameraShakeOver)
         {
-            Debug.Log("while loop on");
             x = Random.Range(-2, 2);
             y = Random.Range(-2, 2);
             Vector3 _shakePosition = new Vector3(x, y, -10);

@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
     private int _enemyType;
     private bool _thirdEnemy;
 
+    private bool _closeToPlayer = false;
+
 
     void Start()
     {
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         EnemyMovement();
+        DistanceCheck();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -79,8 +82,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void DistanceCheck()
+    {
+        float dist = 4f;
+        if (Vector3.Distance(transform.position, _player.transform.position) < dist)
+        {
+            _closeToPlayer = true;
+            Debug.Log("Close to player!");
+        }
+        else if (Vector3.Distance(transform.position, _player.transform.position) > dist && transform.position.y < _player.transform.position.y)
+        {
+            _closeToPlayer = false;
+            Debug.Log("Not close to player");
+        }
+    }
 
-        public void EnemyShieldChange()
+    public void EnemyShieldChange()
     {
         _enemyShield = false;
     }
@@ -139,18 +156,30 @@ public class Enemy : MonoBehaviour
                     float posyrand = Random.Range(2.49f, 6.92f);
                     transform.position = new Vector3(-11.7f, posyrand, transform.position.z);
                 }
-                break;
+            break;
             case 3:
-                Enemy3Movement();
-                if (transform.position.x > 11.7f || transform.position.y < -5.2f)
+                if (_closeToPlayer == false)
                 {
-                    transform.position = new Vector3(-9.4f, 5.93f, transform.position.z);
+                    Enemy3Movement();
+                    if (transform.position.x > 11.7f || transform.position.y < -5.2f)
+                    {
+                        transform.position = new Vector3(-9.4f, 5.93f, transform.position.z);
+                    }
+                }
+
+                else if (_closeToPlayer == true)
+                {
+                    MoveTowardsPlayer();  
                 }
                 break;
 
         }
     }
 
+    private void MoveTowardsPlayer()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, 3f * Time.deltaTime);
+    }
     private IEnumerator Enemy3MovementRoll()
     {
         while (true)

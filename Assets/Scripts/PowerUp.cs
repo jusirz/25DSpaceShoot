@@ -37,40 +37,34 @@ public class PowerUp : MonoBehaviour
                 {
                     case 0:
                         player.ActivateLaserChange(1);
-                        Debug.Log("Triple shot is active.");
                         break;
                     case 1:
                         player.SpeedPower();
-                        Debug.Log("Speed Boost is active.");
                         break;
                     case 2:
                         if (player._activeShield == true)
                         {
-                            Debug.Log("Player shield is already active");
+                            return;
                         }
                         else
                         {
                             player.ShieldPower();
-                            Debug.Log("Shield is active.");
                         }
                         break;
                     case 3:
                         player.AmmoIncrease(15);
-                        Debug.Log("Player collected ammo");
                         break;
                     case 4:
                         player.HealthIncrease();
-                        Debug.Log("Player collected health");
+
                         break;
                     case 5:
                         player.ActivateLaserChange(2);
-                        Debug.Log("Wave shot is active");
                         break;
                     case 6:
                         player.StartSlowDown();
                         break;
                     default:
-                        Debug.Log("Powerup Undefined in switch.");
                         break;
                 }
                 Destroy(this.gameObject);

@@ -7,14 +7,9 @@ public class EnemyShieldBehavior : MonoBehaviour
     [SerializeField]
     private GameObject _enemy;
 
-    void Update()
-    {
-
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _enemy.GetComponent<Enemy>();
         if (collision.CompareTag("Laser"))
         {
             Destroy(collision.gameObject);
