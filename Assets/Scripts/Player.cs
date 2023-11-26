@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
         LaserCooldown();
         AmmoCommunicate();
         ThrustCommunicate();
-
     }
 
     private void StrtPos()

@@ -14,20 +14,13 @@ public class AsteroidBehavior : MonoBehaviour
     public UIManager _uiManager;
     public Spawn_Manager _spawnManager;
 
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn_Manager>();
         _uiManager.AsteroidStartMessageFlip(true);
-
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         AsteroidMove();
@@ -79,7 +72,5 @@ public class AsteroidBehavior : MonoBehaviour
         Instantiate(_explosion, _spawnExplosion, Quaternion.identity);
         yield return new WaitForSeconds(9f);
         Destroy(_explosion);
-        
-
     }
 }

@@ -57,6 +57,9 @@ MonoBehaviour:
     type: 3}
   _rocketShotPrefab: {fileID: 6107810323846758150, guid: 346bfe84140f1c144973c9fd6f3b0e00,
     type: 3}
+  _rocket2ShotPrefab: {fileID: 2598775806647608470, guid: 90c92ddce35ade640bdd4ca3ed6620b5,
+    type: 3}
+  _enemyShieldObject: {fileID: 0}
   _enemyType: 3
 --- !u!212 &8987776548730275716
 SpriteRenderer:

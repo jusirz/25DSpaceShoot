@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     private GameObject _enemyShotPreFab;
     [SerializeField]
     private GameObject _rocketShotPrefab;
+    [SerializeField]
+    private GameObject _rocket2ShotPrefab;
     private bool _enemyAlive = true;
 
     private bool _enemyShield = true;
@@ -28,6 +30,8 @@ public class Enemy : MonoBehaviour
     private bool _thirdEnemy;
 
     private bool _closeToPlayer = false;
+    [SerializeField]
+    private bool _behindPlayer = false;
 
 
     void Start()
@@ -42,8 +46,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        EnemyMovement();
+        BehindCheck();
         DistanceCheck();
+        EnemyMovement();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -87,13 +92,31 @@ public class Enemy : MonoBehaviour
         float dist = 4f;
         if (Vector3.Distance(transform.position, _player.transform.position) < dist)
         {
-            _closeToPlayer = true;
-            Debug.Log("Close to player!");
+            if (_behindPlayer == false)
+            {
+                _closeToPlayer = true;
+            }
+            else
+            {
+                _closeToPlayer = false;
+            }
+
         }
-        else if (Vector3.Distance(transform.position, _player.transform.position) > dist && transform.position.y < _player.transform.position.y)
+        else if (Vector3.Distance(transform.position, _player.transform.position) > dist)
         {
             _closeToPlayer = false;
-            Debug.Log("Not close to player");
+        }
+    }
+    
+    private void BehindCheck()
+    {
+        if (transform.position.y < _player.transform.position.y)
+        {
+            _behindPlayer = true;
+        }
+        else
+        {
+            _behindPlayer = false;
         }
     }
 
@@ -113,8 +136,17 @@ public class Enemy : MonoBehaviour
                 yield return new WaitForSeconds(a);
                 if (_enemyAlive == true)
                 {
-                    Vector3 _enemyLaserPos = transform.position;
-                    GameObject _newRocket = Instantiate(_rocketShotPrefab, _enemyLaserPos, Quaternion.identity);
+                    if (_behindPlayer == false)
+                    {
+                        Vector3 _enemyLaserPos = transform.position;
+                        GameObject _newRocket = Instantiate(_rocketShotPrefab, _enemyLaserPos, Quaternion.identity);
+                    }
+                    if (_behindPlayer == true)
+                    {
+                        Vector3 _enemyLaserPos2 = transform.position;
+                        GameObject _newRocket2 = Instantiate(_rocket2ShotPrefab, _enemyLaserPos2, Quaternion.identity);
+                        Debug.Log("Backwards rocket fired");
+                    }
                 }
                 float b = Random.Range(1f, 3f);
                 yield return new WaitForSeconds(b);
@@ -178,7 +210,10 @@ public class Enemy : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, 3f * Time.deltaTime);
+        if (_behindPlayer == false)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, 3f * Time.deltaTime);
+        }
     }
     private IEnumerator Enemy3MovementRoll()
     {

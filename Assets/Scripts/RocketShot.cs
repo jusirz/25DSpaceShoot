@@ -6,11 +6,15 @@ public class RocketShot : MonoBehaviour
 {
     private readonly float _rocketSpeed = 12f;
     [SerializeField]
+    private int _rocketType;
+    [SerializeField]
     private GameObject _player;
+
 
     void Start()
     {
         _player = GameObject.Find("Player");
+        
     }
     void Update()
     {
@@ -18,11 +22,23 @@ public class RocketShot : MonoBehaviour
     }
     private void RocketLaserMove()
     {
-        transform.Translate(_rocketSpeed * Time.deltaTime * Vector3.down);
-        if (transform.position.y < (-6.4f))
+        if (_rocketType == 1)
         {
-            Destroy(this.gameObject);
+            transform.Translate(_rocketSpeed * Time.deltaTime * Vector3.down);
+            if (transform.position.y < (-6.4f))
+            {
+                Destroy(this.gameObject);
+            }
         }
+        else if (_rocketType == 2)
+        {
+            transform.Translate(_rocketSpeed * Time.deltaTime * Vector3.up);
+            if (transform.position.y > (7.65f))
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
