@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3027030877251036726}
   m_Layer: 0
   m_Name: waveshot
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

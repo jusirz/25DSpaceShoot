@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8028076547673668784}
   m_Layer: 0
   m_Name: Triple_Shot_Power_Up
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,8 +147,6 @@ MonoBehaviour:
   _powerUpSpeed: 3
   _powerupID: 0
   _powerUpSoundSource: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
-  _laserObj: {fileID: 5888808892430586992, guid: 9e49fa84a5a8e9d469866202b6a8de3b,
-    type: 3}
 --- !u!95 &8028076547673668784
 Animator:
   serializedVersion: 3

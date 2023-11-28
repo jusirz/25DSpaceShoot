@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _explodeEnemy = GetComponent<Animator>();
-        _enemyCollider = GetComponent<BoxCollider2D>();
         _explosionSourceEnemy = GetComponent<AudioSource>();
         StartCoroutine(EnemyLaserSpawn());
         StartCoroutine(Enemy3MovementRoll());
@@ -53,37 +52,37 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_player != null || _enemyShield == false)
-        {
-            if (other.CompareTag("Player"))
+            if (_player != null || _enemyShield == false)
             {
-                _enemyAlive = false;
-                _player.Damage();
-                _explodeEnemy.SetTrigger("EnemyExplosion");
-                _explosionSourceEnemy.Play();
-                Destroy(this.gameObject, 2.5f);
-            }
-            if (other.CompareTag("Laser"))
-            {
-                _enemyAlive = false;
-                _explodeEnemy.SetTrigger("EnemyExplosion");
-                Destroy(_enemyCollider);
-                _enemyYMove = 1;
-                Destroy(other.gameObject);
-                _explosionSourceEnemy.Play();
-                _player.AddScore(1);
-                Destroy(this.gameObject, 2.5f);
-            }
-            if (other.CompareTag("shield"))
-            {
-                _enemyAlive = false;
-                _explodeEnemy.SetTrigger("EnemyExplosion");
-                Destroy(_enemyCollider);
-                _enemyYMove = 1;
-                _explosionSourceEnemy.Play();
-                _player.Damage();
-                Destroy(this.gameObject, 2.5f);
-            }
+                if (other.CompareTag("Player"))
+                {
+                    _enemyAlive = false;
+                    _player.Damage();
+                    _explodeEnemy.SetTrigger("EnemyExplosion");
+                    _explosionSourceEnemy.Play();
+                    Destroy(this.gameObject, 2.5f);
+                }
+                if (other.CompareTag("Laser"))
+                {
+                    _enemyAlive = false;
+                    _explodeEnemy.SetTrigger("EnemyExplosion");
+                    Destroy(_enemyCollider);
+                    _enemyYMove = 1;
+                    Destroy(other.gameObject);
+                    _explosionSourceEnemy.Play();
+                    _player.AddScore(1);
+                    Destroy(this.gameObject, 2.5f);
+                }
+                if (other.CompareTag("shield"))
+                {
+                    _enemyAlive = false;
+                    _explodeEnemy.SetTrigger("EnemyExplosion");
+                    Destroy(_enemyCollider);
+                    _enemyYMove = 1;
+                    _explosionSourceEnemy.Play();
+                    _player.Damage();
+                    Destroy(this.gameObject, 2.5f);
+                }
         }
     }
 
@@ -168,6 +167,19 @@ public class Enemy : MonoBehaviour
 
     }
 
+    public void EnemyPickupTrigger()
+    {
+        EnemyPickUp();
+    }
+
+    private void EnemyPickUp()
+    {
+        if (_enemyAlive == true)
+        {
+            Vector3 _enemyLaserPos = transform.position;
+            GameObject _newEnemyLaser = Instantiate(_enemyShotPreFab, _enemyLaserPos, Quaternion.identity);
+        }
+    }
 
     private void EnemyMovement()
     {
