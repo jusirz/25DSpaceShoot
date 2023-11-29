@@ -10,19 +10,53 @@ public class PowerUp : MonoBehaviour
     private int _powerupID; //0 = tripleshot 1 = speed 2 = shield
     [SerializeField]
     private AudioClip _powerUpSoundSource;
+    private GameObject _player;
 
+    private bool _closeToPlayer = false;
+
+
+    private void Start()
+    {
+        _player = GameObject.Find("Player");
+    }
     void Update()
     {
         PowerUpMovement();
+        DistanceCheck();
     }
 
     private void PowerUpMovement()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (_closeToPlayer == true)
+            {
+                MoveTowardsPlayer();
+            }
+        } 
         transform.Translate(_powerUpSpeed * Time.deltaTime * Vector3.down);
         if (transform.position.y <= -5.85f)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void DistanceCheck()
+    {
+        float dist = 4f;
+        if (Vector3.Distance(transform.position, _player.transform.position) < dist)
+        {
+            _closeToPlayer = true;
+        }
+        else if (Vector3.Distance(transform.position, _player.transform.position) > dist)
+        {
+            _closeToPlayer = false;
+        }
+    }
+
+    private void MoveTowardsPlayer()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, 300f * Time.deltaTime);
     }
     public void OnTriggerEnter2D(Collider2D other)
     {

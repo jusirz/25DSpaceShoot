@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     private int _thrusterCool = 10;
     private bool _thrustActive;
 
+ 
 
 
     void Start()
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalcMove();
+        InputControls();
         LaserCooldown();
         AmmoCommunicate();
         ThrustCommunicate();
@@ -75,7 +77,7 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(0, 0, 0);
     }
-    private void CalcMove()
+    private void InputControls()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && _thrusterCool > 1)
         {
@@ -85,7 +87,7 @@ public class Player : MonoBehaviour
             StopCoroutine(ThrusterHeatUp());
 
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _thrustActive = false;
             _speed -= 3;
@@ -93,6 +95,9 @@ public class Player : MonoBehaviour
             StopCoroutine(ThrusterCoolDown());
         }
 
+    }
+    private void CalcMove()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         transform.Translate(_speed * horizontalInput * Time.deltaTime * Vector3.right);
@@ -328,11 +333,17 @@ public class Player : MonoBehaviour
                 break;
             case 1:
                 _playerdamage2.SetActive(true);
-                _playerdamage1.SetActive(true);
+                if (_playerdamage2 == null)
+                {
+                    _playerdamage1.SetActive(true);
+                }
                 break;
             case 2:
                 _playerdamage1.SetActive(true);
-                _playerdamage2.SetActive(false);
+                if (_playerdamage2 != null)
+                {
+                    _playerdamage2.SetActive(false);
+                }
                 break;
             case 3:
                 _playerdamage1.SetActive(false);
