@@ -46,7 +46,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         BehindCheck();
-        DistanceCheck();
+        if (_enemyType == 3)
+        {
+            PlayerDistanceCheck();
+        }
         EnemyMovement();
     }
 
@@ -86,7 +89,25 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void DistanceCheck()
+    public void LaserMovement()
+    {
+        if (_enemyType == 2)
+        {
+            StartCoroutine(LaserMovementSwitch());
+            StopCoroutine(LaserMovementSwitch());
+        }
+    }
+
+    private IEnumerator LaserMovementSwitch()
+    {
+        yield return null;
+        _enemyYMove += 3;
+        yield return new WaitForSeconds(3f);
+        _enemyYMove = 4;
+    }
+
+
+    private void PlayerDistanceCheck()
     {
         float dist = 4f;
         if (Vector3.Distance(transform.position, _player.transform.position) < dist)
@@ -144,7 +165,6 @@ public class Enemy : MonoBehaviour
                     {
                         Vector3 _enemyLaserPos2 = transform.position;
                         GameObject _newRocket2 = Instantiate(_rocket2ShotPrefab, _enemyLaserPos2, Quaternion.identity);
-                        Debug.Log("Backwards rocket fired");
                     }
                 }
                 float b = Random.Range(1f, 3f);
