@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 814827078048229053}
   - component: {fileID: 6872059540685961405}
   - component: {fileID: 8730151335425823574}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -55,7 +55,11 @@ MonoBehaviour:
   _enemyCollider: {fileID: 0}
   _enemyShotPreFab: {fileID: 4073239621906545584, guid: 5072a412bfb23824ebd3356b650410fc,
     type: 3}
+  _rocketShotPrefab: {fileID: 0}
+  _rocket2ShotPrefab: {fileID: 0}
+  _enemyShieldObject: {fileID: 0}
   _enemyType: 4
+  _behindPlayer: 0
 --- !u!212 &4095932249323737216
 SpriteRenderer:
   m_ObjectHideFlags: 0

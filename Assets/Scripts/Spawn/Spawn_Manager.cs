@@ -24,6 +24,8 @@ public class Spawn_Manager : MonoBehaviour
     private GameObject _waveShot;
     [SerializeField]
     private GameObject _slowPowerUp;
+    [SerializeField]
+    private GameObject _homingShot;
 
     [Header("Spawn Times")]
     [SerializeField]
@@ -42,6 +44,8 @@ public class Spawn_Manager : MonoBehaviour
     private float _waveShotSpawnTimer = 100f;
     [SerializeField]
     private float _slowDownSpawnTimer = 30f;
+    [SerializeField]
+    private float _homingShotSpawnTimer = 30f;
 
     [Header("Enemy Info")]
     [SerializeField]
@@ -109,6 +113,16 @@ public class Spawn_Manager : MonoBehaviour
                 break;
         }
 
+    }
+
+    private IEnumerator HomingShotSpawn()
+    {
+        while (_alive == true)
+        {
+            yield return new WaitForSeconds(_homingShotSpawnTimer);
+            Vector3 _homingShotSpawn = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
+            GameObject HomingSpawn = Instantiate(_homingShot, _homingShotSpawn, Quaternion.identity);
+        }
     }
 
     private IEnumerator SlowDownSpawn()
@@ -231,6 +245,7 @@ public class Spawn_Manager : MonoBehaviour
         _alive = false;
         StopCoroutine(ShieldSpawn());
         StopCoroutine(TripleShotSpawn());
+        StopCoroutine(HomingShotSpawn());
         StopCoroutine(SpeedBoostSpawn());
         StopCoroutine(AmmoUpSpawn());
         StopCoroutine(HealthSpawn());
@@ -243,6 +258,7 @@ public class Spawn_Manager : MonoBehaviour
     {
         SpawnEnemy();
         StartCoroutine(EnemySpawnCounter());
+        StartCoroutine(HomingShotSpawn());
         StartCoroutine(TripleShotSpawn());
         StartCoroutine(SpeedBoostSpawn());
         StartCoroutine(ShieldSpawn());

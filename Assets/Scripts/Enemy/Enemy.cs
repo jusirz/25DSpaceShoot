@@ -91,19 +91,15 @@ public class Enemy : MonoBehaviour
 
     public void LaserMovement()
     {
-        if (_enemyType == 2)
-        {
             StartCoroutine(LaserMovementSwitch());
             StopCoroutine(LaserMovementSwitch());
-        }
     }
 
     private IEnumerator LaserMovementSwitch()
     {
-        yield return null;
-        _enemyYMove += 3;
-        yield return new WaitForSeconds(3f);
-        _enemyYMove = 4;
+        _enemyXMove = -6;
+        yield return new WaitForSeconds(1f);
+        _enemyXMove = -4;
     }
 
 

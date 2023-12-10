@@ -94,6 +94,9 @@ public class PowerUp : MonoBehaviour
                 case 6:
                     player.StartSlowDown();
                     break;
+                case 7:
+                    player.ActivateLaserChange(3);
+                    break;
                 default:
                     break;
             }

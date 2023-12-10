@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private GameObject _tripleLaser;
     [SerializeField]
     private GameObject _waveLaser;
+    [SerializeField]
+    private GameObject _homingLaser;
     //player vfx
     public GameObject _ShieldVisual;
     [SerializeField]
@@ -293,6 +295,11 @@ public class Player : MonoBehaviour
                 yield return new WaitForSeconds(5f);
                 _laserCommunicate = 0;
                 break;
+            case 3:
+                _laserCommunicate = 3;
+                yield return new WaitForSeconds(5f);
+                _laserCommunicate = 0;
+                break;
         }
     }
     public void ActivateLaserChange(int _activateKey)
@@ -320,6 +327,12 @@ public class Player : MonoBehaviour
                 _audioSource.Play(0);
                 AmmoDecrease(4);
                 break;
+            case 3:
+                Instantiate(_homingLaser, transform.position, Quaternion.identity);
+                _audioSource.Play(0);
+                AmmoDecrease(4);
+                break;
+
         }
     }
 

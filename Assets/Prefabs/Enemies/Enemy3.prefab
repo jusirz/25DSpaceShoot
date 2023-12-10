@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5702554806989271481}
   - component: {fileID: 1959952272839290809}
   - component: {fileID: 4416599574711419986}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy3
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -61,6 +61,7 @@ MonoBehaviour:
     type: 3}
   _enemyShieldObject: {fileID: 0}
   _enemyType: 3
+  _behindPlayer: 0
 --- !u!212 &8987776548730275716
 SpriteRenderer:
   m_ObjectHideFlags: 0

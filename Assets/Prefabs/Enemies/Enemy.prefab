@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 237851565}
   - component: {fileID: 237851564}
   - component: {fileID: 4233833570216378521}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SecondCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 5769330270459759047}
   - component: {fileID: 288346955710273479}
   - component: {fileID: 2484199032737758252}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 1219947006}
   - component: {fileID: 1219947005}
   - component: {fileID: 1219947004}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shields_00000
   m_TagString: enemyshield
   m_Icon: {fileID: 0}

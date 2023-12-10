@@ -16,6 +16,7 @@ public class PickUpColliderBehavior : MonoBehaviour
         if (other.CompareTag("PowerUp"))
         {
             _enemy.GetComponent<Enemy>().EnemyPickupTrigger();
+
         }
     }
 }
