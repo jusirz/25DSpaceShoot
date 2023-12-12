@@ -55,38 +55,37 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-            if (_player != null || _enemyShield == false)
+        if (_player != null || _enemyShield == false)
+        {
+            if (other.CompareTag("Player"))
             {
-                if (other.CompareTag("Player"))
-                {
-                    _enemyAlive = false;
-                    _player.Damage();
-                    _explodeEnemy.SetTrigger("EnemyExplosion");
-                    _explosionSourceEnemy.Play();
-                    Destroy(this.gameObject, 2.5f);
-                }
-                if (other.CompareTag("Laser"))
-                {
-                    _enemyAlive = false;
-                    _explodeEnemy.SetTrigger("EnemyExplosion");
-                    Destroy(_enemyCollider);
-                    _enemyYMove = 1;
-                    Destroy(other.gameObject);
-                    _explosionSourceEnemy.Play();
-                    _player.AddScore(1);
-                    Destroy(this.gameObject, 2.5f);
-                }
-                if (other.CompareTag("shield"))
-                {
-                    _enemyAlive = false;
-                    _explodeEnemy.SetTrigger("EnemyExplosion");
-                    Destroy(_enemyCollider);
-                    _enemyYMove = 1;
-                    _explosionSourceEnemy.Play();
-                    _player.Damage();
-                    Destroy(this.gameObject, 2.5f);
-                }
+                DeathActions();
+                _player.Damage();
+                Destroy(this.gameObject, 2.5f);
+            }
+            if (other.CompareTag("Laser"))
+            {
+                DeathActions();
+                Destroy(other.gameObject);
+                _player.AddScore(1);
+                Destroy(this.gameObject, 2.5f);
+            }
+            if (other.CompareTag("shield"))
+            {
+                DeathActions();
+                _player.Damage();
+                Destroy(this.gameObject, 2.5f);
+            }
         }
+    }
+
+    private void DeathActions()
+    {
+        Destroy(_enemyCollider);
+        _enemyAlive = false;
+        _explodeEnemy.SetTrigger("EnemyExplosion");
+        _enemyYMove = 1;
+        _explosionSourceEnemy.Play();
     }
 
     public void LaserMovement()

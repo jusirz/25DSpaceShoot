@@ -108,8 +108,11 @@ MonoBehaviour:
     type: 3}
   _waveLaser: {fileID: 9090329485454911545, guid: 7d1eee3902ff5364b89ab3637acbc814,
     type: 3}
+  _homingLaser: {fileID: 4325836162802003666, guid: c1aead9dd29fdfa469e57a5bdf864bf5,
+    type: 3}
   _ShieldVisual: {fileID: 8221414083274634659}
   _playerdamage1: {fileID: 8221414083058608947}
+  _playerdamage2: {fileID: 8221414083322507238}
   _uiManager: {fileID: 0}
   _lives: 3
   _score: 0

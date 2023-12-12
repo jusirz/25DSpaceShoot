@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class HomingLaser : MonoBehaviour
 {
-
-
     private Vector3 _enemyLocation;
     private bool _enableHoming = false;
 
@@ -16,14 +14,11 @@ public class HomingLaser : MonoBehaviour
             HomingMovement();
         }
     }
-
     public void GetEnemyLocation(Vector3 _enemy)
     {
         _enemyLocation = _enemy;
         _enableHoming = true;
     }
-
-
     private void HomingMovement()
     {
             Debug.Log("HomingMovement happening. Location is" + _enemyLocation);

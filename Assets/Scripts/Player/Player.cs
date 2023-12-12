@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public GameObject _ShieldVisual;
     [SerializeField]
     private GameObject _playerdamage1;
+    [SerializeField]
     private GameObject _playerdamage2;
     //ui stuff
     public UIManager _uiManager;
@@ -57,7 +58,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        StrtPos();
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn_Manager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
@@ -75,10 +75,6 @@ public class Player : MonoBehaviour
         ThrustCommunicate();
     }
 
-    private void StrtPos()
-    {
-        transform.position = new Vector3(0, 0, 0);
-    }
     private void InputControls()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && _thrusterCool > 1)
@@ -173,7 +169,6 @@ public class Player : MonoBehaviour
         {
             _shieldDamage++;
             ShieldPowerTime();
-            Debug.Log("Shield Blocking active. 1 damage to shield.");
         }
         else if (_activeShield == false)
         {
@@ -229,6 +224,7 @@ public class Player : MonoBehaviour
     }
     public void ShieldPower()
     {
+        _shieldDamage = 0;
         _activeShield = true;
         _ShieldVisual.SetActive(true);
         _uiManager.ShieldUIActivate();
@@ -239,17 +235,17 @@ public class Player : MonoBehaviour
         {
             case 1:
                 _uiManager.ShieldUIChange();
-                Debug.Log("Shield took one damage");
                 break;
             case 2:
                 _uiManager.ShieldUIChange();
-                Debug.Log("Shield took two damage");
                 break;
             case 3:
                 _uiManager.ShieldUIChange();
-                Debug.Log("Shield took three damage and is destroyed");
                 _activeShield = false;
                 _ShieldVisual.SetActive(false);
+                break;
+            default:
+                Debug.Log("Shield has fallen out of control");
                 break;
         }
     }
@@ -313,26 +309,38 @@ public class Player : MonoBehaviour
         switch (_laserCommunicate)
         {
             case 0:
-                Instantiate(_laser, transform.position + new Vector3(0, 1.3f, 0), Quaternion.identity);
-                _audioSource.Play(0);
-                AmmoDecrease(1);
+                if (_ammo >= 1)
+                {
+                    Instantiate(_laser, transform.position + new Vector3(0, 1.3f, 0), Quaternion.identity);
+                    _audioSource.Play(0);
+                    AmmoDecrease(1);
+                }
                 break;
             case 1:
-                Instantiate(_tripleLaser, transform.position, Quaternion.identity);
-                _audioSource.Play(0);
-                AmmoDecrease(3);
+                if (_ammo >= 3)
+                {
+                    Instantiate(_tripleLaser, transform.position, Quaternion.identity);
+                    _audioSource.Play(0);
+                    AmmoDecrease(3);
+                }
                 break;
             case 2:
-                Instantiate(_waveLaser, transform.position, Quaternion.identity);
-                _audioSource.Play(0);
-                AmmoDecrease(4);
+                if (_ammo >= 4)
+                {
+                    Instantiate(_waveLaser, transform.position, Quaternion.identity);
+                    _audioSource.Play(0);
+                    AmmoDecrease(4);
+                }
+
                 break;
             case 3:
-                Instantiate(_homingLaser, transform.position, Quaternion.identity);
-                _audioSource.Play(0);
-                AmmoDecrease(4);
+                if (_ammo >= 4)
+                {
+                    Instantiate(_homingLaser, transform.position, Quaternion.identity);
+                    _audioSource.Play(0);
+                    AmmoDecrease(4);
+                }
                 break;
-
         }
     }
 
@@ -346,7 +354,7 @@ public class Player : MonoBehaviour
                 break;
             case 1:
                 _playerdamage2.SetActive(true);
-                if (_playerdamage2 == null)
+                if (_playerdamage1 == null)
                 {
                     _playerdamage1.SetActive(true);
                 }
@@ -357,9 +365,6 @@ public class Player : MonoBehaviour
                 {
                     _playerdamage2.SetActive(false);
                 }
-                break;
-            case 3:
-                _playerdamage1.SetActive(false);
                 break;
             default:
                 Debug.Log("Player damage visualization is broken");

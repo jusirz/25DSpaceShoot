@@ -35,7 +35,9 @@ public class UIManager : MonoBehaviour
     private GameObject _ammoOut;
     [SerializeField]
     private Slider _thrusterSlider;
-    private float _thrustSliderValue;
+    [SerializeField]
+    private Slider _dreadHealth;
+
 
     void Start()
     {
@@ -57,6 +59,11 @@ public class UIManager : MonoBehaviour
     public void UpdateAmmo(int playerAmmo)
     {
         _ammoNumber.text = "" + playerAmmo;
+    }
+
+    public void DreadHealthUpdate(float _bossHealth)
+    {
+        _dreadHealth.value = _bossHealth;
     }
 
     public void ThrusterUpdate(float thrustValue)
