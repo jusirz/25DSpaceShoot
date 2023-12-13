@@ -29,7 +29,7 @@ public class DreadnoughtBoss : MonoBehaviour
     {
         DreadnaughtMovement();
         _uiManager.DreadHealthUpdate(_bossHealth);
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -49,11 +49,21 @@ public class DreadnoughtBoss : MonoBehaviour
         }
     }
 
+    private void TurnOnHealthBar()
+    {
+        if (transform.position.x == .88f)
+        {
+            _uiManager.EnableDreadHealthBar();
+        }
+    }
+
     private void DreadnaughtMovement()
     {
         if (transform.position.x > .88f)
         {
             transform.Translate(Vector3.left * _dreadSpeed * Time.deltaTime);
+            Debug.Log("Dreadnaught movement happened");
+            TurnOnHealthBar();
         }
     }
 

@@ -81,8 +81,8 @@ public class Enemy : MonoBehaviour
 
     private void DeathActions()
     {
-        Destroy(_enemyCollider);
         _enemyAlive = false;
+        Destroy(_enemyCollider);
         _explodeEnemy.SetTrigger("EnemyExplosion");
         _enemyYMove = 1;
         _explosionSourceEnemy.Play();
@@ -228,7 +228,11 @@ public class Enemy : MonoBehaviour
 
                 else if (_closeToPlayer == true)
                 {
-                    MoveTowardsPlayer();  
+                    if (_enemyAlive == true)
+                    {
+                        MoveTowardsPlayer();
+                    }
+                    
                 }
                 break;
 

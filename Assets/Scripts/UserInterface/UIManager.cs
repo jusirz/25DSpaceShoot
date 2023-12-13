@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     private Slider _thrusterSlider;
     [SerializeField]
     private Slider _dreadHealth;
+    [SerializeField]
+    private GameObject _bosshealth;
 
 
     void Start()
@@ -45,7 +47,6 @@ public class UIManager : MonoBehaviour
         _ammoNumber.text = "" + 0;
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         _player = GameObject.Find("Player").GetComponent<Player>();
-
     }
     public void UpdateScore(int playerScore)
     {
@@ -64,6 +65,15 @@ public class UIManager : MonoBehaviour
     public void DreadHealthUpdate(float _bossHealth)
     {
         _dreadHealth.value = _bossHealth;
+    }
+    public void EnableDreadHealthBar()
+    {
+        _bosshealth.SetActive(true); 
+    }
+
+    public void DisableDreadHealthBar()
+    {
+        _bosshealth.SetActive(false);
     }
 
     public void ThrusterUpdate(float thrustValue)

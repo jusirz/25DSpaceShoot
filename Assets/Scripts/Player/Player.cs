@@ -367,7 +367,7 @@ public class Player : MonoBehaviour
                 }
                 break;
             default:
-                Debug.Log("Player damage visualization is broken");
+                Debug.Log("Player damage visualization is off or not working");
                 break;
         }
     }

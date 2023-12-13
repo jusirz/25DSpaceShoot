@@ -71,7 +71,7 @@ public class Spawn_Manager : MonoBehaviour
 
     public void Start()
     {
-        SpawnAsteroid();
+       //SpawnAsteroid();
         
         SetTimers();
         _GameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
