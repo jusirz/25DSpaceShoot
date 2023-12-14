@@ -10,10 +10,12 @@ public class DreadnoughtBoss : MonoBehaviour
     private int _bossHealth = 100;
     [SerializeField]
     private float _dreadSpeed = 3f;
+    [SerializeField]
+    private GameObject _swarm;
 
 
     private bool _dreadnaughtDead = false;
-    private bool _openingSequence = true;
+
 
     private UIManager _uiManager;
     // Start is called before the first frame update
@@ -49,12 +51,11 @@ public class DreadnoughtBoss : MonoBehaviour
         }
     }
 
-    private void TurnOnHealthBar()
+    private IEnumerator TurnOnHealthBar()
     {
-        if (transform.position.x == .88f)
-        {
-            _uiManager.EnableDreadHealthBar();
-        }
+        yield return new WaitForSeconds(3f);
+        Debug.Log("health bar in dreadboss script");
+        _uiManager.EnableDreadHealthBar();
     }
 
     private void DreadnaughtMovement()
@@ -63,7 +64,7 @@ public class DreadnoughtBoss : MonoBehaviour
         {
             transform.Translate(Vector3.left * _dreadSpeed * Time.deltaTime);
             Debug.Log("Dreadnaught movement happened");
-            TurnOnHealthBar();
+            StartCoroutine(TurnOnHealthBar());
         }
     }
 
@@ -83,5 +84,10 @@ public class DreadnoughtBoss : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private IEnumerator SwarmSpawn()
+    {
+        yield return null;
     }
 }

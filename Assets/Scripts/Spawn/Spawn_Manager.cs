@@ -71,10 +71,10 @@ public class Spawn_Manager : MonoBehaviour
 
     public void Start()
     {
-       //SpawnAsteroid();
+       SpawnAsteroid();
         
-        SetTimers();
-        _GameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+       SetTimers();
+       _GameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
     }
 
     private void SetTimers()
