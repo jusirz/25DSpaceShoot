@@ -53,7 +53,7 @@ MonoBehaviour:
   _enemyXMove: -4
   _player: {fileID: 0}
   _explodeEnemy: {fileID: 0}
-  _enemyCollider: {fileID: 0}
+  _enemyCollider: {fileID: 8475305999967195380}
   _enemyShotPreFab: {fileID: 4073239621906545584, guid: 5072a412bfb23824ebd3356b650410fc,
     type: 3}
   _rocketShotPrefab: {fileID: 0}

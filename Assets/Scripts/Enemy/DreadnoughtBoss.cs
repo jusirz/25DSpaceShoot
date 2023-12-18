@@ -12,9 +12,20 @@ public class DreadnoughtBoss : MonoBehaviour
     private float _dreadSpeed = 3f;
     [SerializeField]
     private GameObject _swarm;
+    [SerializeField]
+    private bool _centered;
+    [SerializeField]
+    private float _attackSpeed = 3f;
+
+    //Damage
+    [SerializeField]
+    private GameObject damage1;
+    [SerializeField]
+    private GameObject damage2;
+    [SerializeField]
+    private GameObject damage3;
 
 
-    private bool _dreadnaughtDead = false;
 
 
     private UIManager _uiManager;
@@ -23,7 +34,9 @@ public class DreadnoughtBoss : MonoBehaviour
     {
         _player = GameObject.Find("Player");
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        transform.position = new Vector3(20.61f, 4.88f, 0f);
+        transform.position = new Vector3(20.61f, 5.58f, 0f);
+        StartCoroutine(DreadnaughtAttack());
+        damage3 = gameObject.GetComponentsInChildren<>
     }
 
     // Update is called once per frame
@@ -31,7 +44,7 @@ public class DreadnoughtBoss : MonoBehaviour
     {
         DreadnaughtMovement();
         _uiManager.DreadHealthUpdate(_bossHealth);
-
+        BossVisualDamage();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -54,16 +67,30 @@ public class DreadnoughtBoss : MonoBehaviour
     private IEnumerator TurnOnHealthBar()
     {
         yield return new WaitForSeconds(3f);
-        Debug.Log("health bar in dreadboss script");
         _uiManager.EnableDreadHealthBar();
+    }
+
+    private void BossVisualDamage()
+    {
+        switch (_bossHealth)
+        {
+            case 75:
+                damage1.SetActive(true);
+                break;
+            case 50:
+                damage2.SetActive(true);
+                break;
+            case 25:
+                damage3.SetActive(true);
+                break;
+        }
     }
 
     private void DreadnaughtMovement()
     {
         if (transform.position.x > .88f)
         {
-            transform.Translate(Vector3.left * _dreadSpeed * Time.deltaTime);
-            Debug.Log("Dreadnaught movement happened");
+            transform.Translate(_dreadSpeed * Time.deltaTime * Vector3.left);
             StartCoroutine(TurnOnHealthBar());
         }
     }
@@ -71,23 +98,32 @@ public class DreadnoughtBoss : MonoBehaviour
     private void DreadnaughtDamage(int taken)
     {
         _bossHealth -= taken;
-        Debug.Log("boss health is " + _bossHealth);
         if (_bossHealth <= 0)
         {
-            _dreadnaughtDead = true;
+            BossDeath();
         }
     }
 
     private void BossDeath()
     {
-        if (_dreadnaughtDead == true)
-        {
-            Destroy(this.gameObject);
-        }
+        _uiManager.DisableDreadHealthBar();
+        Destroy(this.gameObject);
     }
 
-    private IEnumerator SwarmSpawn()
+
+    private IEnumerator DreadnaughtAttack()
     {
-        yield return null;
+        while (_bossHealth > 0)
+        {
+            yield return new WaitForSeconds(_attackSpeed);
+            
+            for (int i = 0; i < 2; i++)
+            {
+                Vector3 swarmPos = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
+                _ = Instantiate(_swarm, swarmPos, Quaternion.identity);  
+            }
+
+        }
+
     }
 }

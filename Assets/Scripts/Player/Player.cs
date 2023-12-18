@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private float _speed = 8f;
     private readonly float _fireRate = .25f;
     private float _canFire = -.1f;
+    [SerializeField]
     private int _ammo = 15;
     //laser objects
     [SerializeField]
