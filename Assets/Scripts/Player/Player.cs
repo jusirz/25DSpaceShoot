@@ -54,7 +54,10 @@ public class Player : MonoBehaviour
     private int _thrusterCool = 10;
     private bool _thrustActive;
 
- 
+    private Vector3 originalscale;
+
+
+
 
 
     void Start()
@@ -65,6 +68,7 @@ public class Player : MonoBehaviour
         _audioSource.clip = _laserSound;
         _cameraobject = GameObject.FindWithTag("MainCamera");
         _uiManager.UpdateAmmo(_ammo);
+        originalscale = transform.localScale;
     }
 
     void Update()
@@ -74,6 +78,21 @@ public class Player : MonoBehaviour
         LaserCooldown();
         AmmoCommunicate();
         ThrustCommunicate();
+
+    }
+    public void ActivateScaling()
+    {
+        ScaledPlayer();
+    }
+    private void ScaledPlayer()
+    {
+        float halfXScale;
+        float halfYScale;
+        halfYScale = originalscale.y / 2;
+        halfXScale = originalscale.x / 2;
+        Vector3 halfSized = new Vector3(halfXScale, halfYScale, transform.position.z);
+        Vector3 lerpSize = Vector3.Lerp(originalscale, halfSized, 2f);
+        transform.localScale = lerpSize;
     }
 
     private void InputControls()

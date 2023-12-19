@@ -36,7 +36,6 @@ public class DreadnoughtBoss : MonoBehaviour
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         transform.position = new Vector3(20.61f, 5.58f, 0f);
         StartCoroutine(DreadnaughtAttack());
-        damage3 = gameObject.GetComponentsInChildren<>
     }
 
     // Update is called once per frame
@@ -44,7 +43,7 @@ public class DreadnoughtBoss : MonoBehaviour
     {
         DreadnaughtMovement();
         _uiManager.DreadHealthUpdate(_bossHealth);
-        BossVisualDamage();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -70,22 +69,6 @@ public class DreadnoughtBoss : MonoBehaviour
         _uiManager.EnableDreadHealthBar();
     }
 
-    private void BossVisualDamage()
-    {
-        switch (_bossHealth)
-        {
-            case 75:
-                damage1.SetActive(true);
-                break;
-            case 50:
-                damage2.SetActive(true);
-                break;
-            case 25:
-                damage3.SetActive(true);
-                break;
-        }
-    }
-
     private void DreadnaughtMovement()
     {
         if (transform.position.x > .88f)
@@ -101,6 +84,21 @@ public class DreadnoughtBoss : MonoBehaviour
         if (_bossHealth <= 0)
         {
             BossDeath();
+        }
+        if (_bossHealth <= 75 && damage1.activeInHierarchy != true)
+        {
+            damage1.SetActive(true);
+            _attackSpeed = 2.5f;
+        }
+        if (_bossHealth <= 50 && damage2.activeInHierarchy != true)
+        {
+            damage2.SetActive(true);
+            _attackSpeed = 2f;
+        }
+        if (_bossHealth <= 25 && damage3.activeInHierarchy != true)
+        {
+            damage3.SetActive(true);
+            _attackSpeed = 1.5f;
         }
     }
 

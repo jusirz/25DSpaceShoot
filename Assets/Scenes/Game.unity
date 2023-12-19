@@ -205,8 +205,13 @@ PrefabInstance:
       objectReference: {fileID: 1555141953}
     - target: {fileID: 6476126623459828056, guid: 566964c9e8c1e6246976b5f7a0389cf8,
         type: 3}
+      propertyPath: _dreadSpeed
+      value: 3.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476126623459828056, guid: 566964c9e8c1e6246976b5f7a0389cf8,
+        type: 3}
       propertyPath: _attackSpeed
-      value: 0.9
+      value: 14.18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566964c9e8c1e6246976b5f7a0389cf8, type: 3}
@@ -2974,7 +2979,7 @@ PrefabInstance:
     - target: {fileID: 8221414082228276963, guid: a73ed01d1481df240a5fdc86cfa3acc2,
         type: 3}
       propertyPath: _ammo
-      value: 216
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8221414082228276963, guid: a73ed01d1481df240a5fdc86cfa3acc2,
         type: 3}

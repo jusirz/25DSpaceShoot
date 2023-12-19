@@ -155,12 +155,12 @@ public class Enemy : MonoBehaviour
                     if (_behindPlayer == false)
                     {
                         Vector3 _enemyLaserPos = transform.position;
-                        GameObject _newRocket = Instantiate(_rocketShotPrefab, _enemyLaserPos, Quaternion.identity);
+                        _ = Instantiate(_rocketShotPrefab, _enemyLaserPos, Quaternion.identity);
                     }
                     if (_behindPlayer == true)
                     {
                         Vector3 _enemyLaserPos2 = transform.position;
-                        GameObject _newRocket2 = Instantiate(_rocket2ShotPrefab, _enemyLaserPos2, Quaternion.identity);
+                        _ = Instantiate(_rocket2ShotPrefab, _enemyLaserPos2, Quaternion.identity);
                     }
                 }
                 float b = Random.Range(1f, 3f);
@@ -173,7 +173,7 @@ public class Enemy : MonoBehaviour
                 if (_enemyAlive == true)
                 {
                     Vector3 _enemyLaserPos = transform.position;
-                    GameObject _newEnemyLaser = Instantiate(_enemyShotPreFab, _enemyLaserPos, Quaternion.identity);
+                    _ = Instantiate(_enemyShotPreFab, _enemyLaserPos, Quaternion.identity);
                 }
                 float b = Random.Range(1f, 3f);
                 yield return new WaitForSeconds(b);
@@ -193,7 +193,7 @@ public class Enemy : MonoBehaviour
         if (_enemyAlive == true)
         {
             Vector3 _enemyLaserPos = transform.position;
-            GameObject _newEnemyLaser = Instantiate(_enemyShotPreFab, _enemyLaserPos, Quaternion.identity);
+            _ = Instantiate(_enemyShotPreFab, _enemyLaserPos, Quaternion.identity);
         }
     }
 
