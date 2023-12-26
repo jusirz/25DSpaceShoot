@@ -21,7 +21,15 @@ public class HomingLaser : MonoBehaviour
     }
     private void HomingMovement()
     {
-            Debug.Log("HomingMovement happening. Location is" + _enemyLocation);
-            transform.position = Vector3.MoveTowards(transform.position, _enemyLocation, 10f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _enemyLocation, 10f * Time.deltaTime);
+    }
+
+    public void ActivateFailedToFind()
+    {
+        FailedToFind();
+    }
+    private void FailedToFind()
+    {
+        Destroy(this.gameObject); 
     }
 }

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private int _stageChoice;
     public Spawn_Manager _SpawnManager;
     public UIManager _UIManager;
-
+    private bool _bossSpawned = false;
 
 
     private void Start()
@@ -19,9 +19,6 @@ public class GameManager : MonoBehaviour
         _UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
     }
-
-
-
 
     private void Update()
     {
@@ -33,8 +30,11 @@ public class GameManager : MonoBehaviour
         {
             Application.Quit();
         }
-        _gameSeconds = Time.time;
-        StageManager();
+        _gameSeconds = Time.timeSinceLevelLoad;
+        if (_bossSpawned != true)
+        {
+            StageManager();
+        }
     }
     public void GameOver()
     {
@@ -56,9 +56,17 @@ public class GameManager : MonoBehaviour
         {
             _stageChoice = 3;
         }
-        else if (_gameSeconds > 360f)
+        else if (_gameSeconds > 360f && _gameSeconds < 500f)
         {
             _stageChoice = 4;
+        }
+        else if (_gameSeconds > 500f)
+        {
+            if (_bossSpawned == false)
+            {
+                _SpawnManager.BossSpawnTurnOn();
+                _bossSpawned = true;
+            }
         }
         _SpawnManager.StageSpawn(_stageChoice);
         EnemyWaveDisplay();

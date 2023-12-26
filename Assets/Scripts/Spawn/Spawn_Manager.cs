@@ -66,11 +66,11 @@ public class Spawn_Manager : MonoBehaviour
 
     [SerializeField]
     private GameObject _dreadBoss;
-    private bool _bossActivation = false;
+    
 
     public void Start()
     {
-        //SpawnAsteroid();
+        SpawnAsteroid();
         SetTimers();
         _GameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         _player = GameObject.Find("Player");
@@ -82,7 +82,7 @@ public class Spawn_Manager : MonoBehaviour
         DreadSpawn();
     }
 
- 
+
 
     private void SetTimers()
     {
@@ -98,6 +98,7 @@ public class Spawn_Manager : MonoBehaviour
         Vector3 _dreadSpawnPos = new Vector3(20.61f, 4.88f, 0f);
         GameObject newBoss = Instantiate(_dreadBoss, _dreadSpawnPos, Quaternion.identity);
         _player.GetComponent<Player>().ActivateScaling();
+        StopCoroutine(EnemySpawnCounter());
     }
     private void SpawnEnemy()
     {
@@ -273,6 +274,7 @@ public class Spawn_Manager : MonoBehaviour
     }
     public void StartSpawnEngine()
     {
+        _player.GetComponent<Player>().AmmoIncrease(1);
         SpawnEnemy();
         StartCoroutine(EnemySpawnCounter());
         StartCoroutine(HomingShotSpawn());

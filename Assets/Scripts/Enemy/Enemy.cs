@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private bool _behindPlayer = false;
 
+    private float _movementCancel = 2f;
+
 
     void Start()
     {
@@ -86,7 +88,9 @@ public class Enemy : MonoBehaviour
         Destroy(_enemyCollider);
         _explodeEnemy.SetTrigger("EnemyExplosion");
         _enemyYMove = 1;
+        _enemyXMove = -1;
         _explosionSourceEnemy.Play();
+        Enemy3MovementCancel();
     }
 
     public void LaserMovement()
@@ -97,9 +101,17 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator LaserMovementSwitch()
     {
-        _enemyXMove = -6;
-        yield return new WaitForSeconds(1f);
-        _enemyXMove = -4;
+        if (_enemyAlive != false)
+        {
+            _enemyXMove = -6;
+            yield return new WaitForSeconds(1f);
+            if (_enemyAlive != false)
+            {
+                _enemyXMove = -4;
+            }
+            
+        }
+
     }
 
 
@@ -247,14 +259,21 @@ public class Enemy : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, 3f * Time.deltaTime);
         }
     }
+
+    private void Enemy3MovementCancel()
+    {
+        _movementCancel += 20f;
+    }
     private IEnumerator Enemy3MovementRoll()
     {
         while (true)
         {
-            _thirdEnemy = false;
-            yield return new WaitForSeconds(2f);
-            _thirdEnemy = true;
-            yield return new WaitForSeconds(2f);
+
+                _thirdEnemy = false;
+                yield return new WaitForSeconds(_movementCancel);
+                _thirdEnemy = true;
+                yield return new WaitForSeconds(_movementCancel);
+
         }
     }
 
@@ -262,11 +281,11 @@ public class Enemy : MonoBehaviour
     {
         if (_thirdEnemy == true)
         {
-            transform.Translate(_enemyYMove * Time.deltaTime * Vector3.down);
+           transform.Translate(_enemyYMove * Time.deltaTime * Vector3.down);
         }
         else if (_thirdEnemy == false)
         {
-            transform.Translate(_enemyXMove * Time.deltaTime * Vector3.left);
+                transform.Translate(_enemyXMove * Time.deltaTime * Vector3.left);  
         }
     }
 }

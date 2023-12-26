@@ -7,31 +7,73 @@ public class CircleDetector : MonoBehaviour
 {
     private GameObject _homingLaser;
     public LayerMask _enemyLayer;
+    private GameObject _hitObject;
+    private bool _messageSent = false;
+
 
 
     void Start()
     {
         _homingLaser = transform.parent.gameObject;
+        DetectEnemy();
     }
 
     private void FixedUpdate()
+    {
+        if (_messageSent == true)
+        {
+            StartCoroutine(SendLocationInfo());
+        }
+        
+    }
+
+    public IEnumerator SendLocationInfo()
+    {
+        while (true)
+        {
+            _homingLaser.GetComponent<HomingLaser>().GetEnemyLocation(_hitObject.transform.position);
+            yield return new WaitForEndOfFrame();
+            if (_hitObject == null)
+            {
+                _homingLaser.GetComponent<HomingLaser>().ActivateFailedToFind();
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private void DetectEnemy()
     {
         Vector2 origin = transform.position;
         RaycastHit2D[] hits = Physics2D.CircleCastAll(origin, 40f, Vector2.zero, Mathf.Infinity, _enemyLayer, minDepth: 0f, maxDepth: 0f);
         List<RaycastHit2D> hitList = new List<RaycastHit2D>(hits);
         List<float> distances = new List<float>();
-        foreach (var hit in hitList)
+        if (hits.Length != 0) 
         {
-            distances.Add(hit.distance);
-        }
-        float smallestDistance = distances.Min();
-        foreach (var hit in hitList)
-        {
-            if (hit.distance == smallestDistance)
+            foreach (var hit in hitList)
             {
-                _homingLaser.GetComponent<HomingLaser>().GetEnemyLocation(hit.transform.position);
+
+              distances.Add(hit.distance);
+            }
+            float smallestDistance = distances.Min();
+            foreach (var hit in hitList)
+            {
+
+                if (hit.distance == smallestDistance)
+                {
+                    if (_messageSent == false)
+                    {
+                        _hitObject = hit.collider.gameObject;
+                        _messageSent = true;
+                    }
+                }
             }
         }
-    }
+        else if (hits.Length == 0)
+                {
+                    _homingLaser.GetComponent<HomingLaser>().ActivateFailedToFind();
+                    Debug.Log("hits was null and void was called");
+                }
+
+        }
 
 }

@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8221414082228276964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.34, y: -3.04, z: 0}
-  m_LocalScale: {x: 0.65172493, y: 0.53992623, z: 0.53992623}
+  m_LocalScale: {x: 0.62411785, y: 0.517055, z: 0.517055}
   m_Children:
   - {fileID: 8221414083274634657}
   - {fileID: 8221414083956900087}
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 8
+  _ammo: 15
   _laser: {fileID: 4671597575392382861, guid: c184a50289bea8841bbc662017543b7d, type: 3}
   _tripleLaser: {fileID: 5888808892430586992, guid: 9e49fa84a5a8e9d469866202b6a8de3b,
     type: 3}

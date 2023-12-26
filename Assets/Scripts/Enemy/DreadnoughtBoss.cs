@@ -114,8 +114,7 @@ public class DreadnoughtBoss : MonoBehaviour
         while (_bossHealth > 0)
         {
             yield return new WaitForSeconds(_attackSpeed);
-            
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Vector3 swarmPos = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
                 _ = Instantiate(_swarm, swarmPos, Quaternion.identity);  

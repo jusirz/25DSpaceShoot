@@ -135,7 +135,15 @@ public class UIManager : MonoBehaviour
 
     public void StartEnemyWave(int wavenumber)
     {
-        _newEnemyWaveMessage.text = "Enemy Wave " + wavenumber;
+        if (_bosshealth.activeInHierarchy == false)
+        {
+            _newEnemyWaveMessage.text = "Enemy Wave " + wavenumber;
+
+        }
+        else
+        {
+            _newEnemyWaveMessage.text = "BOSS BATTLE";
+        }
     }
 
 
