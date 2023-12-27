@@ -44,14 +44,18 @@ public class PowerUp : MonoBehaviour
     private void DistanceCheck()
     {
         float dist = 4f;
-        if (Vector3.Distance(transform.position, _player.transform.position) < dist)
+        if (_player != null)
         {
-            _closeToPlayer = true;
+            if (Vector3.Distance(transform.position, _player.transform.position) < dist)
+            {
+                _closeToPlayer = true;
+            }
+            else if (Vector3.Distance(transform.position, _player.transform.position) > dist)
+            {
+                _closeToPlayer = false;
+            }
         }
-        else if (Vector3.Distance(transform.position, _player.transform.position) > dist)
-        {
-            _closeToPlayer = false;
-        }
+
     }
 
     private void MoveTowardsPlayer()

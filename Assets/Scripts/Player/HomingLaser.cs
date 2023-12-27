@@ -6,6 +6,12 @@ public class HomingLaser : MonoBehaviour
 {
     private Vector3 _enemyLocation;
     private bool _enableHoming = false;
+    private GameObject _player;
+
+    private void Start()
+    {
+        _player = GameObject.Find("Player");
+    }
 
     private void FixedUpdate()
     {
@@ -24,12 +30,28 @@ public class HomingLaser : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, _enemyLocation, 10f * Time.deltaTime);
     }
 
-    public void ActivateFailedToFind()
+    public void ActivateFailedToFind(int option)
     {
-        FailedToFind();
+        if (option == 1)
+        {
+            FailedToFind(1);
+        }
+        if (option == 2)
+        {
+            FailedToFind(2);
+        }
     }
-    private void FailedToFind()
+    private void FailedToFind(int option)
     {
-        Destroy(this.gameObject); 
+        if (option == 1)
+        {
+            _player.GetComponent<Player>().AmmoIncrease(4);
+            Destroy(this.gameObject);
+        }
+        if (option == 2)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 }

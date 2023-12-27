@@ -43,6 +43,7 @@ public class AsteroidBehavior : MonoBehaviour
             Destroy(other.gameObject);
             _uiManager.AsteroidStartMessageFlip(false);
             StopCoroutine(ExplodeTimer());
+            _uiManager.TurnOffInstructions();
             _spawnManager.StartSpawnEngine();
         }
     }

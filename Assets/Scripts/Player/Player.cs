@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
 
     private Vector3 originalscale;
 
+    
+
 
 
 
@@ -364,6 +366,7 @@ public class Player : MonoBehaviour
         }
     }
 
+
     private void VisualDamageChanger()
     {
 
@@ -384,6 +387,12 @@ public class Player : MonoBehaviour
                 if (_playerdamage2 != null)
                 {
                     _playerdamage2.SetActive(false);
+                }
+                break;
+            case 3:
+                if (_playerdamage1 != null)
+                {
+                    _playerdamage1.SetActive(false);
                 }
                 break;
             default:

@@ -31,13 +31,18 @@ public class CircleDetector : MonoBehaviour
     {
         while (true)
         {
-            _homingLaser.GetComponent<HomingLaser>().GetEnemyLocation(_hitObject.transform.position);
-            yield return new WaitForEndOfFrame();
             if (_hitObject == null)
             {
-                _homingLaser.GetComponent<HomingLaser>().ActivateFailedToFind();
+                _messageSent = false;
+                _homingLaser.GetComponent<HomingLaser>().ActivateFailedToFind(2);
+                Destroy(this.gameObject);
+            }
+            if (_hitObject != null && _homingLaser != null)
+            {
+                _homingLaser.GetComponent<HomingLaser>().GetEnemyLocation(_hitObject.transform.position);
             }
             yield return new WaitForEndOfFrame();
+
         }
     }
 
@@ -69,10 +74,10 @@ public class CircleDetector : MonoBehaviour
             }
         }
         else if (hits.Length == 0)
-                {
-                    _homingLaser.GetComponent<HomingLaser>().ActivateFailedToFind();
-                    Debug.Log("hits was null and void was called");
-                }
+        {
+            _homingLaser.GetComponent<HomingLaser>().ActivateFailedToFind(1);
+            Debug.Log("hits was null and void was called");
+        }
 
         }
 

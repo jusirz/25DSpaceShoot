@@ -217,6 +217,10 @@ public class Enemy : MonoBehaviour
                 transform.Translate(_enemyYMove * Time.deltaTime * Vector3.down);
                 if (transform.position.y < -5.2f)
                 {
+                    if (_enemyAlive != true)
+                    {
+                        Destroy(this.gameObject);
+                    }
                     float _posXRand = Random.Range(-9.45f, 9.67f);
                     transform.position = new Vector3(_posXRand, 7.18f, transform.position.z);
                 }
@@ -225,6 +229,10 @@ public class Enemy : MonoBehaviour
                 transform.Translate(_enemyXMove * Time.deltaTime * Vector3.left);
                 if (transform.position.x > 11.7f)
                 {
+                    if (_enemyAlive != true)
+                    {
+                        Destroy(this.gameObject);
+                    }
                     float posyrand = Random.Range(2.49f, 6.92f);
                     transform.position = new Vector3(-11.7f, posyrand, transform.position.z);
                 }
@@ -235,6 +243,10 @@ public class Enemy : MonoBehaviour
                     Enemy3Movement();
                     if (transform.position.x > 11.7f || transform.position.y < -5.2f)
                     {
+                        if (_enemyAlive != true)
+                        {
+                            Destroy(this.gameObject);
+                        }
                         transform.position = new Vector3(-9.4f, 5.93f, transform.position.z);
                     }
                 }

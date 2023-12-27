@@ -51,6 +51,8 @@ public class Spawn_Manager : MonoBehaviour
     [SerializeField]
     private GameObject _enemytoSpawn1;
     [SerializeField]
+    private GameObject _enemytoSpawn15;
+    [SerializeField]
     private GameObject _enemytoSpawn2;
     [SerializeField]
     private GameObject _enemytoSpawn3;
@@ -105,10 +107,19 @@ public class Spawn_Manager : MonoBehaviour
         switch (_enemiesSpawned)
         {
             case 1:
-                Vector3 enemyspawnpos1 = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
-                GameObject newEnemy = Instantiate(_enemytoSpawn1, enemyspawnpos1, Quaternion.identity);
-                newEnemy.transform.parent = _enemyContainer.transform;
-                break;
+                if (_stageSelector < 3)
+                {
+                    Vector3 enemyspawnpos1 = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
+                    GameObject newEnemy = Instantiate(_enemytoSpawn1, enemyspawnpos1, Quaternion.identity);
+                    newEnemy.transform.parent = _enemyContainer.transform;
+                }
+                if (_stageSelector > 2)
+                {
+                    Vector3 enemyspawnpos15 = new Vector3(Random.Range(-9.45f, 9.67f), 5.58f, 0);
+                    GameObject newEnemy = Instantiate(_enemytoSpawn15, enemyspawnpos15, Quaternion.identity);
+                    newEnemy.transform.parent = _enemyContainer.transform;
+                }
+                    break;
             case 2:
                 Vector3 enemyspawnpos2 = new Vector3(-11.7f, Random.Range(2.49f, 6.92f), 0);
                 GameObject newEnemy2 = Instantiate(_enemytoSpawn2, enemyspawnpos2, Quaternion.identity);
@@ -211,12 +222,8 @@ public class Spawn_Manager : MonoBehaviour
 
     public void SpawnAsteroid()
     {
-        if (true)
-        {
-            Vector3 _asteroidStartPos = new Vector3(0, 8.2f, 0);
-            GameObject _AsteroidSpawn = Instantiate(_AsteroidObject, _asteroidStartPos, Quaternion.identity);
-        }
-
+        Vector3 _asteroidStartPos = new Vector3(0, 8.2f, 0);
+        GameObject _AsteroidSpawn = Instantiate(_AsteroidObject, _asteroidStartPos, Quaternion.identity);
     }
 
     private IEnumerator EnemySpawnCounter()

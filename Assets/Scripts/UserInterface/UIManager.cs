@@ -39,6 +39,10 @@ public class UIManager : MonoBehaviour
     private Slider _dreadHealth;
     [SerializeField]
     private GameObject _bosshealth;
+    [SerializeField]
+    private GameObject _shiftControl;
+    [SerializeField]
+    private GameObject _spaceControl;
 
 
     void Start()
@@ -68,12 +72,18 @@ public class UIManager : MonoBehaviour
     }
     public void EnableDreadHealthBar()
     {
-        _bosshealth.SetActive(true); 
+        _bosshealth.SetActive(true);
     }
 
     public void DisableDreadHealthBar()
     {
         _bosshealth.SetActive(false);
+    }
+
+    public void TurnOffInstructions()
+    {
+        _shiftControl.SetActive(false);
+        _spaceControl.SetActive(false);
     }
 
     public void ThrusterUpdate(float thrustValue)
