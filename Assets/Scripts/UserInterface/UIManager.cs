@@ -43,7 +43,8 @@ public class UIManager : MonoBehaviour
     private GameObject _shiftControl;
     [SerializeField]
     private GameObject _spaceControl;
-
+    [SerializeField]
+    private GameObject _wMessage;
 
     void Start()
     {
@@ -141,6 +142,31 @@ public class UIManager : MonoBehaviour
             _gameOver.SetActive(false);
             yield return new WaitForSeconds(.5f);
         }
+    }
+
+    public void ChangeGameWon(bool option)
+    {
+        if (option == true)
+        {
+            GameWon(true);
+        }
+        if (option == false)
+        {
+            GameWon(false);
+        }
+    }
+
+    private void GameWon(bool option)
+    {
+        if (option == true)
+        {
+            _wMessage.SetActive(true);
+        }
+        if (option == false)
+        {
+            _wMessage.SetActive(false);
+        }
+        
     }
 
     public void StartEnemyWave(int wavenumber)

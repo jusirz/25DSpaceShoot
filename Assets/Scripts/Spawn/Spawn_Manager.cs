@@ -68,7 +68,8 @@ public class Spawn_Manager : MonoBehaviour
 
     [SerializeField]
     private GameObject _dreadBoss;
-    
+    private bool _dreadSpawn = false;
+
 
     public void Start()
     {
@@ -100,7 +101,7 @@ public class Spawn_Manager : MonoBehaviour
         Vector3 _dreadSpawnPos = new Vector3(20.61f, 4.88f, 0f);
         GameObject newBoss = Instantiate(_dreadBoss, _dreadSpawnPos, Quaternion.identity);
         _player.GetComponent<Player>().ActivateScaling();
-        StopCoroutine(EnemySpawnCounter());
+        _dreadSpawn = true;
     }
     private void SpawnEnemy()
     {
@@ -228,7 +229,7 @@ public class Spawn_Manager : MonoBehaviour
 
     private IEnumerator EnemySpawnCounter()
     {
-        while (true)
+        while (_dreadSpawn != true)
         {
             _enemiesSpawned = 1;
             SpawnEnemy();

@@ -5,6 +5,8 @@ using UnityEngine;
 public class DreadnoughtBoss : MonoBehaviour
 {
     private GameObject _player;
+    private GameObject _gameManager;
+    
 
     [SerializeField]
     private int _bossHealth = 100;
@@ -34,6 +36,7 @@ public class DreadnoughtBoss : MonoBehaviour
     {
         _player = GameObject.Find("Player");
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _gameManager = GameObject.Find("Game_Manager");
         transform.position = new Vector3(20.61f, 5.58f, 0f);
         StartCoroutine(DreadnaughtAttack());
     }
@@ -84,6 +87,7 @@ public class DreadnoughtBoss : MonoBehaviour
         if (_bossHealth <= 0)
         {
             BossDeath();
+            _gameManager.GetComponent<GameManager>().GameOver();
         }
         if (_bossHealth <= 75 && damage1.activeInHierarchy != true)
         {
@@ -106,6 +110,8 @@ public class DreadnoughtBoss : MonoBehaviour
     {
         _uiManager.DisableDreadHealthBar();
         Destroy(this.gameObject);
+        _uiManager.ChangeGameWon(true);
+        
     }
 
 
