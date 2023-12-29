@@ -26,6 +26,8 @@ public class Spawn_Manager : MonoBehaviour
     private GameObject _slowPowerUp;
     [SerializeField]
     private GameObject _homingShot;
+    [SerializeField]
+    private GameObject _enemyClear;
 
     [Header("Spawn Times")]
     [SerializeField]
@@ -101,7 +103,14 @@ public class Spawn_Manager : MonoBehaviour
         Vector3 _dreadSpawnPos = new Vector3(20.61f, 4.88f, 0f);
         GameObject newBoss = Instantiate(_dreadBoss, _dreadSpawnPos, Quaternion.identity);
         _player.GetComponent<Player>().ActivateScaling();
+        EnemyClear();
         _dreadSpawn = true;
+    }
+
+    private void EnemyClear()
+    {
+        Vector3 enemyclearpos = new Vector3(0, 0, 0);
+        GameObject enemyClear = Instantiate(_enemyClear, enemyclearpos, Quaternion.identity);
     }
     private void SpawnEnemy()
     {

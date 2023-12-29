@@ -88,6 +88,7 @@ public class DreadnoughtBoss : MonoBehaviour
         {
             BossDeath();
             _gameManager.GetComponent<GameManager>().GameOver();
+            _uiManager.GetComponent<UIManager>().RestartMessageOn();
         }
         if (_bossHealth <= 75 && damage1.activeInHierarchy != true)
         {

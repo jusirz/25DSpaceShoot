@@ -144,6 +144,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void RestartMessageOn()
+    {
+        RestartMessage();
+    }
+
+    private void RestartMessage()
+    {
+        _restartMessage.SetActive(true);
+    }
     public void ChangeGameWon(bool option)
     {
         if (option == true)
