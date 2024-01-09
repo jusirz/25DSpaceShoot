@@ -21,13 +21,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _homingLaser;
     //player vfx
-    public GameObject _ShieldVisual;
+    private GameObject _ShieldVisual;
     [SerializeField]
-    private GameObject _playerdamage1;
+    private GameObject _playerDamage1;
     [SerializeField]
-    private GameObject _playerdamage2;
+    private GameObject _playerDamage2;
     //ui stuff
-    public UIManager _uiManager;
+    private UIManager _uiManager;
     [SerializeField]
     private int _lives = 3;
     [SerializeField]
@@ -43,24 +43,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Spawn_Manager _spawnManager;
 
-    public bool _activeShield = false;
-    public int _shieldDamage;
+    public bool activeShield= false;
+    public int shieldDamage;
     private int _laserCommunicate = 0;
 
     //camera
     [SerializeField]
-    private GameObject _cameraobject;
-
+    private GameObject _cameraObject;
     private int _thrusterCool = 10;
     private bool _thrustActive;
-
     private Vector3 originalscale;
-
-    
-
-
-
-
 
     void Start()
     {
@@ -68,7 +60,7 @@ public class Player : MonoBehaviour
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.clip = _laserSound;
-        _cameraobject = GameObject.FindWithTag("MainCamera");
+        _cameraObject = GameObject.FindWithTag("MainCamera");
         _uiManager.UpdateAmmo(_ammo);
         originalscale = transform.localScale;
     }
@@ -187,12 +179,12 @@ public class Player : MonoBehaviour
     }
     public void Damage()
     {
-        if (_activeShield == true)
+        if (activeShield== true)
         {
-            _shieldDamage++;
+            shieldDamage++;
             ShieldPowerTime();
         }
-        else if (_activeShield == false)
+        else if (activeShield== false)
         {
             _lives--;
             CameraShake();
@@ -246,14 +238,14 @@ public class Player : MonoBehaviour
     }
     public void ShieldPower()
     {
-        _shieldDamage = 0;
-        _activeShield = true;
+        shieldDamage = 0;
+        activeShield= true;
         _ShieldVisual.SetActive(true);
         _uiManager.ShieldUIActivate();
     }
     private void ShieldPowerTime()
     {
-        switch (_shieldDamage)
+        switch (shieldDamage)
         {
             case 1:
                 _uiManager.ShieldUIChange();
@@ -263,7 +255,7 @@ public class Player : MonoBehaviour
                 break;
             case 3:
                 _uiManager.ShieldUIChange();
-                _activeShield = false;
+                activeShield= false;
                 _ShieldVisual.SetActive(false);
                 break;
             default:
@@ -376,23 +368,23 @@ public class Player : MonoBehaviour
                 PlayerGameOverSequence();
                 break;
             case 1:
-                _playerdamage2.SetActive(true);
-                if (_playerdamage1 == null)
+                _playerDamage2.SetActive(true);
+                if (_playerDamage1 == null)
                 {
-                    _playerdamage1.SetActive(true);
+                    _playerDamage1.SetActive(true);
                 }
                 break;
             case 2:
-                _playerdamage1.SetActive(true);
-                if (_playerdamage2 != null)
+                _playerDamage1.SetActive(true);
+                if (_playerDamage2 != null)
                 {
-                    _playerdamage2.SetActive(false);
+                    _playerDamage2.SetActive(false);
                 }
                 break;
             case 3:
-                if (_playerdamage1 != null)
+                if (_playerDamage1 != null)
                 {
-                    _playerdamage1.SetActive(false);
+                    _playerDamage1.SetActive(false);
                 }
                 break;
             default:
@@ -402,7 +394,7 @@ public class Player : MonoBehaviour
     }
     public void CameraShake()
     {
-        _cameraobject.GetComponent<CameraBehavior>().ActiveCameraShake();
+        _cameraObject.GetComponent<CameraBehavior>().ActiveCameraShake();
         Debug.Log("CameraShake in player");
     }
 

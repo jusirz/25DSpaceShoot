@@ -7,13 +7,11 @@ public class PowerUp : MonoBehaviour
     [SerializeField]
     private float _powerUpSpeed = 3.0f;
     [SerializeField]
-    private int _powerupID; //0 = tripleshot 1 = speed 2 = shield
+    private int _powerUpID; //0 = tripleshot 1 = speed 2 = shield
     [SerializeField]
     private AudioClip _powerUpSoundSource;
     private GameObject _player;
-
     private bool _closeToPlayer = false;
-
 
     private void Start()
     {
@@ -31,7 +29,7 @@ public class PowerUp : MonoBehaviour
         {
             if (_closeToPlayer == true)
             {
-                MoveTowardsPlayer();
+                StartCoroutine(MoveTowardsPlayer());
             }
         } 
         transform.Translate(_powerUpSpeed * Time.deltaTime * Vector3.down);
@@ -43,7 +41,7 @@ public class PowerUp : MonoBehaviour
 
     private void DistanceCheck()
     {
-        float dist = 4f;
+        float dist = 8f;
         if (_player != null)
         {
             if (Vector3.Distance(transform.position, _player.transform.position) < dist)
@@ -55,12 +53,15 @@ public class PowerUp : MonoBehaviour
                 _closeToPlayer = false;
             }
         }
-
     }
 
-    private void MoveTowardsPlayer()
+    private IEnumerator MoveTowardsPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, 300f * Time.deltaTime);
+        while (true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, 100f * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -68,7 +69,7 @@ public class PowerUp : MonoBehaviour
         if (other.CompareTag("Player") && player != null)
         {
             AudioSource.PlayClipAtPoint(_powerUpSoundSource, transform.position);
-            switch (_powerupID)
+            switch (_powerUpID)
             {
                 case 0:
                     player.ActivateLaserChange(1);
@@ -77,7 +78,7 @@ public class PowerUp : MonoBehaviour
                     player.SpeedPower();
                     break;
                 case 2:
-                    if (player._activeShield == true)
+                    if (player.activeShield == true)
                     {
                         return;
                     }
@@ -111,10 +112,7 @@ public class PowerUp : MonoBehaviour
             Destroy(this.gameObject);
             Destroy(other.gameObject);
         }
-
     }
-
-
 }
 
 

@@ -8,10 +8,12 @@ public class Enemy : MonoBehaviour
     private int _enemyYMove = 9;
     [SerializeField]
     private float _enemyXMove = 4;
-    public Player _player;
-    public Animator _explodeEnemy;
-
-    public BoxCollider2D _enemyCollider;
+    [SerializeField]
+    private Player _player;
+    [SerializeField]
+    private Animator _explodeEnemy;
+    [SerializeField]
+    private BoxCollider2D _enemyCollider;
     private AudioSource _explosionSourceEnemy;
     [SerializeField]
     private GameObject _enemyShotPreFab;

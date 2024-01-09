@@ -4,16 +4,14 @@ using UnityEngine;
 public class CameraBehavior : MonoBehaviour
 {
     [SerializeField]
-    private Vector3 _homeposition = new Vector3(0, 1, -10);
+    private Vector3 _homePosition = new Vector3(0, 1, -10);
 
     private float _elapsed = 1f;
     private float _cameraShakeOver;
-    
-
 
     private void Start()
     {
-        transform.position = _homeposition;
+        transform.position = _homePosition;
 
     }
     private IEnumerator CameraShake()
@@ -26,12 +24,12 @@ public class CameraBehavior : MonoBehaviour
             x = Random.Range(-2, 2);
             y = Random.Range(-2, 2);
             Vector3 _shakePosition = new Vector3(x, y, -10);
-            Vector3 _lerpPos = Vector3.Lerp(_homeposition, _shakePosition, .1f);
+            Vector3 _lerpPos = Vector3.Lerp(_homePosition, _shakePosition, .1f);
             transform.position = _lerpPos;
             yield return new WaitForSeconds(.25f);
         }
         yield return null;
-        transform.position = _homeposition;
+        transform.position = _homePosition;
     }
 
     private void ShakeTimer()

@@ -44,8 +44,8 @@ public class Swarm : MonoBehaviour
         }
         else if (other.CompareTag("Laser"))
         {
-            Destroy(this.gameObject);
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

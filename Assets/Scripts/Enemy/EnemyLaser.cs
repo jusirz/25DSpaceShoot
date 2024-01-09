@@ -31,12 +31,10 @@ public class EnemyLaser : MonoBehaviour
         {
             _player.GetComponent<Player>().Damage();
             Destroy(this.gameObject);
-            Debug.Log("Enemy Laser Collided with player");
         }
         else if (other.CompareTag("shield"))
         {
             _player.GetComponent<Player>().Damage();
-            Debug.Log("Shield was hit");
         }
     }
 }

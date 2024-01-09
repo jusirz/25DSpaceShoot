@@ -6,7 +6,7 @@ using System.Linq;
 public class CircleDetector : MonoBehaviour
 {
     private GameObject _homingLaser;
-    public LayerMask _enemyLayer;
+    private LayerMask _enemyLayer;
     private GameObject _hitObject;
     private bool _messageSent = false;
 

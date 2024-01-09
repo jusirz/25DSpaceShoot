@@ -15,7 +15,6 @@ public class EnemyLaserDetection : MonoBehaviour
         if (other.CompareTag("Laser"))
         {
             _enemy.GetComponent<Enemy>().LaserMovement();
-            Debug.Log("Enemy Detected Laser");
         }
     }
 }

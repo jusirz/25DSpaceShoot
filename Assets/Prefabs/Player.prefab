@@ -111,19 +111,19 @@ MonoBehaviour:
     type: 3}
   _homingLaser: {fileID: 4325836162802003666, guid: c1aead9dd29fdfa469e57a5bdf864bf5,
     type: 3}
-  _ShieldVisual: {fileID: 8221414083274634659}
-  _playerdamage1: {fileID: 8221414083058608947}
-  _playerdamage2: {fileID: 8221414083322507238}
-  _uiManager: {fileID: 0}
+  _playerDamage1: {fileID: 1188456263685399718, guid: 3c3f01745d758524387baca4f55ad5df,
+    type: 3}
+  _playerDamage2: {fileID: 342982622880330441, guid: 1f2dfefe33d4397459dad8b64740cbeb,
+    type: 3}
   _lives: 3
   _score: 0
   enemy: {fileID: 856930815911908516, guid: 3fa8f720727caa441b24ae1a87cd1e96, type: 3}
   _audioSource: {fileID: 0}
   _laserSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _spawnManager: {fileID: 0}
-  _activeShield: 0
-  _shieldDamage: 0
-  _cameraobject: {fileID: 0}
+  activeShield: 0
+  shieldDamage: 0
+  _cameraObject: {fileID: 0}
 --- !u!61 &8221414082228276960
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -500,6 +500,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: playerhurt1
       objectReference: {fileID: 0}
+    - target: {fileID: 1188456263685399718, guid: 3c3f01745d758524387baca4f55ad5df,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1188456263685399719, guid: 3c3f01745d758524387baca4f55ad5df,
         type: 3}
       propertyPath: m_RootOrder
@@ -557,12 +562,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c3f01745d758524387baca4f55ad5df, type: 3}
---- !u!1 &8221414083058608947 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1188456263685399718, guid: 3c3f01745d758524387baca4f55ad5df,
-    type: 3}
-  m_PrefabInstance: {fileID: 7090471350624866197}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8221414083058608946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1188456263685399719, guid: 3c3f01745d758524387baca4f55ad5df,
@@ -638,12 +637,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f2dfefe33d4397459dad8b64740cbeb, type: 3}
---- !u!1 &8221414083322507238 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 342982622880330441, guid: 1f2dfefe33d4397459dad8b64740cbeb,
-    type: 3}
-  m_PrefabInstance: {fileID: 8564386804130454831}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8221414083322507237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 342982622880330442, guid: 1f2dfefe33d4397459dad8b64740cbeb,

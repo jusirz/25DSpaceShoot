@@ -21,11 +21,11 @@ public class DreadnoughtBoss : MonoBehaviour
 
     //Damage
     [SerializeField]
-    private GameObject damage1;
+    private GameObject _damage1;
     [SerializeField]
-    private GameObject damage2;
+    private GameObject _damage2;
     [SerializeField]
-    private GameObject damage3;
+    private GameObject _damage3;
 
 
 
@@ -90,19 +90,19 @@ public class DreadnoughtBoss : MonoBehaviour
             _gameManager.GetComponent<GameManager>().GameOver();
             _uiManager.GetComponent<UIManager>().RestartMessageOn();
         }
-        if (_bossHealth <= 75 && damage1.activeInHierarchy != true)
+        if (_bossHealth <= 75 && _damage1.activeInHierarchy != true)
         {
-            damage1.SetActive(true);
+            _damage1.SetActive(true);
             _attackSpeed = 2.5f;
         }
-        if (_bossHealth <= 50 && damage2.activeInHierarchy != true)
+        if (_bossHealth <= 50 && _damage2.activeInHierarchy != true)
         {
-            damage2.SetActive(true);
+            _damage2.SetActive(true);
             _attackSpeed = 2f;
         }
-        if (_bossHealth <= 25 && damage3.activeInHierarchy != true)
+        if (_bossHealth <= 25 && _damage3.activeInHierarchy != true)
         {
-            damage3.SetActive(true);
+            _damage3.SetActive(true);
             _attackSpeed = 1.5f;
         }
     }
@@ -111,8 +111,7 @@ public class DreadnoughtBoss : MonoBehaviour
     {
         _uiManager.DisableDreadHealthBar();
         Destroy(this.gameObject);
-        _uiManager.ChangeGameWon(true);
-        
+        _uiManager.ChangeGameWon(true);   
     }
 
 

@@ -11,8 +11,8 @@ public class AsteroidBehavior : MonoBehaviour
     private bool _activateRotate = false;
     [SerializeField]
     private GameObject _explosion;
-    public UIManager _uiManager;
-    public Spawn_Manager _spawnManager;
+    private UIManager _uiManager;
+    private Spawn_Manager _spawnManager;
 
     void Start()
     {

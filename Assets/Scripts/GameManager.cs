@@ -6,17 +6,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private bool _isGameOver;
+    [SerializeField]
     private float _gameSeconds;
     private int _stageChoice;
-    public Spawn_Manager _SpawnManager;
-    public UIManager _UIManager;
+    private Spawn_Manager _spawnManager;
+    private UIManager _uiManager;
     private bool _bossSpawned = false;
 
 
     private void Start()
     {
-        _SpawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn_Manager>();
-        _UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn_Manager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
     }
 
@@ -64,17 +65,17 @@ public class GameManager : MonoBehaviour
         {
             if (_bossSpawned == false)
             {
-                _SpawnManager.BossSpawnTurnOn();
+                _spawnManager.BossSpawnTurnOn();
                 _bossSpawned = true;
             }
         }
-        _SpawnManager.StageSpawn(_stageChoice);
+        _spawnManager.StageSpawn(_stageChoice);
         EnemyWaveDisplay();
         
     }
 
     public void EnemyWaveDisplay()
     {
-        _UIManager.GetComponent<UIManager>().StartEnemyWave(_stageChoice);
+        _uiManager.GetComponent<UIManager>().StartEnemyWave(_stageChoice);
     }
 }

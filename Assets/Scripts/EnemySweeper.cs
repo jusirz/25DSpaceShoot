@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemySweeper : MonoBehaviour
 {
-    public LayerMask _enemyLayer;
-    private GameObject _hitEnemy;
-    // Start is called before the first frame update
+    [SerializeField]
+    private LayerMask _enemyLayer;
+ 
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);

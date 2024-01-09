@@ -6,7 +6,6 @@ public class Laser : MonoBehaviour
 {
     [SerializeField]
     private int _laserSpeed = 10;
-    [SerializeField]
 
     void Update()
     {

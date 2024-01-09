@@ -226,7 +226,7 @@ public class UIManager : MonoBehaviour
 
     public void ShieldUIChange()
     {
-        switch (_player._shieldDamage)
+        switch (_player.shieldDamage)
         {
             case 1:
                 _shieldCount3.SetActive(false);
