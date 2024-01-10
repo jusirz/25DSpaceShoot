@@ -21,7 +21,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _homingLaser;
     //player vfx
-    private GameObject _ShieldVisual;
+    [SerializeField]
+    private GameObject _shieldVisual;
     [SerializeField]
     private GameObject _playerDamage1;
     [SerializeField]
@@ -240,7 +241,7 @@ public class Player : MonoBehaviour
     {
         shieldDamage = 0;
         activeShield= true;
-        _ShieldVisual.SetActive(true);
+        _shieldVisual.SetActive(true);
         _uiManager.ShieldUIActivate();
     }
     private void ShieldPowerTime()
@@ -256,7 +257,7 @@ public class Player : MonoBehaviour
             case 3:
                 _uiManager.ShieldUIChange();
                 activeShield= false;
-                _ShieldVisual.SetActive(false);
+                _shieldVisual.SetActive(false);
                 break;
             default:
                 Debug.Log("Shield has fallen out of control");

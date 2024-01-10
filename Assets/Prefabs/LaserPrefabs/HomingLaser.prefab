@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a5bd9a9b3e6274c8429fbc3ec6f1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _homingLaser: {fileID: 4325836162802003666}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  _hitObject: {fileID: 0}
 --- !u!50 &3626981996437568799
 Rigidbody2D:
   serializedVersion: 4

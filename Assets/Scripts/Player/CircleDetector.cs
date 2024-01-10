@@ -5,9 +5,13 @@ using System.Linq;
 
 public class CircleDetector : MonoBehaviour
 {
+    [SerializeField]
     private GameObject _homingLaser;
+    [SerializeField]
     private LayerMask _enemyLayer;
+    [SerializeField]
     private GameObject _hitObject;
+    
     private bool _messageSent = false;
 
 
